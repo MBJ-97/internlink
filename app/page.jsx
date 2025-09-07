@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { MagnifyingGlassIcon, UsersIcon, ChartBarIcon, MegaphoneIcon, BriefcaseIcon } from '@heroicons/react/24/outline';
+import BenefitCard from "@/components/BenefitCard";
 
 export default function Home() {
   return (
@@ -46,27 +47,21 @@ export default function Home() {
               </p>
             </div>
             <div className="grid grid-cols-[repeat(auto-fit,minmax(158px,1fr))] gap-3 p-0">
-              <div className="flex flex-1 gap-3 rounded-lg border border-[#cddcea] bg-slate-50 p-4 flex-col">
-                <UsersIcon className="h-6 w-6 text-[#0c151d]" />
-                <div className="flex flex-col gap-1">
-                  <h2 className="text-[#0c151d] text-base font-bold leading-tight">Access Talented Students</h2>
-                  <p className="text-[#4574a1] text-sm font-normal leading-normal">Connect with a diverse pool of ambitious students seeking real-world experience.</p>
-                </div>
-              </div>
-              <div className="flex flex-1 gap-3 rounded-lg border border-[#cddcea] bg-slate-50 p-4 flex-col">
-                <ChartBarIcon className="h-6 w-6 text-[#0c151d]" />
-                <div className="flex flex-col gap-1">
-                  <h2 className="text-[#0c151d] text-base font-bold leading-tight">Enhance Employer Branding</h2>
-                  <p className="text-[#4574a1] text-sm font-normal leading-normal">Showcase your company culture and values to attract top talent.</p>
-                </div>
-              </div>
-              <div className="flex flex-1 gap-3 rounded-lg border border-[#cddcea] bg-slate-50 p-4 flex-col">
-                <MegaphoneIcon className="h-6 w-6 text-[#0c151d]" />
-                <div className="flex flex-col gap-1">
-                  <h2 className="text-[#0c151d] text-base font-bold leading-tight">Streamlined Recruitment</h2>
-                  <p className="text-[#4574a1] text-sm font-normal leading-normal">Simplify your internship program with our easy-to-use platform.</p>
-                </div>
-              </div>
+              <BenefitCard
+                icon={<UsersIcon className="h-6 w-6 text-[#0c151d]" />}
+                title="Access Talented Students"
+                description="Connect with a diverse pool of ambitious students seeking real-world experience."
+              />
+              <BenefitCard
+                icon={<ChartBarIcon className="h-6 w-6 text-[#0c151d]" />}
+                title="Enhance Employer Branding"
+                description="Showcase your company culture and values to attract top talent."
+              />
+              <BenefitCard
+                icon={<MegaphoneIcon className="h-6 w-6 text-[#0c151d]" />}
+                title="Streamlined Recruitment"
+                description="Simplify your internship program with our easy-to-use platform."
+              />
             </div>
           </div>
 
@@ -81,21 +76,16 @@ export default function Home() {
               </p>
             </div>
             <div className="grid grid-cols-[repeat(auto-fit,minmax(158px,1fr))] gap-3 p-0">
-              <div className="flex flex-1 gap-3 rounded-lg border border-[#cddcea] bg-slate-50 p-4 flex-col">
-                <MagnifyingGlassIcon className="h-6 w-6 text-[#0c151d]" />
-                <div className="flex flex-col gap-1">
-                  <h2 className="text-[#0c151d] text-base font-bold leading-tight">Easy Internship Search</h2>
-                  <p className="text-[#4574a1] text-sm font-normal leading-normal">Find internships that match your skills and interests with our intuitive search tools.</p>
-                </div>
-              </div>
-              <div className="flex flex-1 gap-3 rounded-lg border border-[#cddcea] bg-slate-50 p-4 flex-col">
-                <BriefcaseIcon className="h-6 w-6 text-[#0c151d]" />
-                <div className="flex flex-col gap-1">
-                  <h2 className="text-[#0c151d] text-base font-bold leading-tight">Bridge to Professional World</h2>
-                  <p className="text-[#4574a1] text-sm font-normal leading-normal">Gain valuable experience and build your resume with real-world projects.</p>
-                </div>
-              </div>
-              
+              <BenefitCard
+                icon={<MagnifyingGlassIcon className="h-6 w-6 text-[#0c151d]" />}
+                title="Easy Internship Search"
+                description="Find internships that match your skills and interests with our intuitive search tools."
+              />
+              <BenefitCard
+                icon={<BriefcaseIcon className="h-6 w-6 text-[#0c151d]" />}
+                title="Bridge to Professional World"
+                description="Gain valuable experience and build your resume with real-world projects."
+              />
             </div>
           </div>
         </div>
