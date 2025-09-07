@@ -11,7 +11,7 @@ import {
 import { Button } from "@/components/ui/button"
 
 const InternshipsPage = async () => {
-  const { data: offers, error } = await supabase.from('offers').select('*, companies(*)')
+  const { data: offers, error } = await supabase.from('offers').select('*, companies(*)').eq('is_active', true)
 
   if (error) {
     console.error('Error fetching offers:', error)
