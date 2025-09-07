@@ -38,5 +38,7 @@ export async function updateInternshipStatus(id, newIsActive) {
 
   console.log('Internship status updated successfully')
   revalidatePath('/admin')
+  revalidatePath('/internships')
+  revalidatePath('/internships', 'layout')
   return { success: true }
 }
