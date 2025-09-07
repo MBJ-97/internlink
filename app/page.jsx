@@ -9,10 +9,10 @@ export default function Home() {
   return (
     <main>
       <div
-        className="flex min-h-[480px] flex-col gap-6 bg-cover bg-center bg-no-repeat items-center justify-center p-4"
+        className="flex min-h-[600px] flex-col gap-6 bg-cover bg-center bg-no-repeat items-center justify-center p-4 mx-4 md:mx-16 rounded-3xl"
         style={{
           backgroundImage:
-            "linear-gradient(rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.4) 100%), url(/landing-bg.png)",
+            "linear-gradient(rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.8) 100%), url(/hero-image.jpg)",
         }}
       >
         <motion.div
@@ -33,17 +33,17 @@ export default function Home() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
-          className="flex w-full max-w-[480px]"
+          className="flex flex-col md:flex-row w-full max-w-[480px] gap-4 items-center"
         >
-          <div className="relative w-full">
-            <MagnifyingGlassIcon className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
-            <Input
-              placeholder="Search internships"
-              className="pl-10 w-full"
-            />
-          </div>
-          <motion.div whileHover={{ y: -2 }} transition={{ duration: 0.2 }}>
-            <Button className="ml-2">Find Internships</Button>
+          <motion.div whileHover={{ y: -2 }} transition={{ duration: 0.2 }} className="w-full">
+            <Button asChild size="lg" className="bg-green-500 hover:bg-green-600 text-white w-full font-bold">
+              <a href="/admin">Add an Internship Offer</a>
+            </Button>
+          </motion.div>
+          <motion.div whileHover={{ y: -2 }} transition={{ duration: 0.2 }} className="w-full">
+            <Button className="bg-blue-500 hover:bg-blue-600 text-white w-full font-bold" asChild size="lg">
+              <a href="/internships">Find Internships</a>
+            </Button>
           </motion.div>
         </motion.div>
       </div>

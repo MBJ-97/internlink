@@ -30,14 +30,14 @@ const Header = () => {
   }
 
   return (
-    <header className="flex justify-between items-center p-4">
+    <header className="flex justify-between items-center p-4 mb-8">
       <div>
         <a href="/" className="text-2xl font-bold">InternLink</a>
       </div>
       <nav className="hidden md:flex space-x-4">
         <a href="/internships">Internships</a>
         <a href="/companies">Companies</a>
-        <a href="/about">About</a>
+        <a href="/about">Blog</a>
       </nav>
       <div className='hidden md:flex space-x-2'>
         {session ? (
