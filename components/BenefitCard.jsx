@@ -10,8 +10,8 @@ import { motion } from "framer-motion"
   
   export default function BenefitCard({ icon, title, description }) {
     return (
-      <motion.div whileHover={{ y: -5 }} transition={{ duration: 0.2 }}>
-        <Card>
+      <motion.div whileHover={{ y: -5 }} transition={{ duration: 0.2 }} className="h-full">
+        <Card className="h-full">
           <CardHeader>
             {icon}
             <CardTitle className='mt-2 mb-4'>{title}</CardTitle>

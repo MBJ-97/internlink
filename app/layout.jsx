@@ -10,8 +10,8 @@ const space_grotesk = Space_Grotesk({
 });
 
 export const metadata = {
-  title: "InternLink - Find Your Dream Internship",
-  description: "InternLink is a platform that connects students with internship opportunities.",
+  title: "InternLink - Trouvez Votre Stage Idéal",
+  description: "InternLink est une plateforme qui connecte les étudiants avec des opportunités de stage.",
 };
 
 export default function RootLayout({ children }) {

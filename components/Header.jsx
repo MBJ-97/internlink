@@ -30,52 +30,56 @@ const Header = () => {
   }
 
   return (
-    <header className="flex justify-between items-center p-4 mb-8">
-      <div>
-        <a href="/" className="text-2xl font-bold">InternLink</a>
-      </div>
-      <nav className="hidden md:flex space-x-4">
-        <a href="/internships">Internships</a>
-        <a href="/companies">Companies</a>
-        <a href="/about">Blog</a>
-      </nav>
-      <div className='hidden md:flex space-x-2'>
-        {session ? (
-          <>
+    <header className="py-4 mb-8">
+      <div className="mx-4 md:mx-16 flex justify-between items-center">
+        <div>
+          <a href="/">
+            <img src="/internlink_logo.png" alt="InternLink Logo" width={84} height={28} />
+          </a>
+        </div>
+        <nav className="hidden md:flex space-x-4">
+          <a href="/internships">Stages</a>
+          <a href="/companies">Entreprises</a>
+          <a href="/about">À Propos</a>
+        </nav>
+        <div className='hidden md:flex space-x-2'>
+          {session ? (
+            <>
+              <Button variant="outline" asChild>
+                <a href="/admin">Admin</a>
+              </Button>
+              <Button onClick={handleLogout}>Déconnexion</Button>
+            </>
+          ) : (
             <Button variant="outline" asChild>
-              <a href="/admin">Admin</a>
+              <a href="/admin/login">Admin Login</a>
             </Button>
-            <Button onClick={handleLogout}>Logout</Button>
-          </>
-        ) : (
-          <Button variant="outline" asChild>
-            <a href="/admin/login">Admin Login</a>
-          </Button>
-        )}
-      </div>
-      <div className="md:hidden">
-        <Sheet>
-          <SheetTrigger asChild>
-            <Button variant="outline">
-              <Menu className="h-6 w-6" />
-            </Button>
-          </SheetTrigger>
-          <SheetContent>
-            <nav className="flex flex-col space-y-4 mt-8">
-              <a href="/internships">Internships</a>
-              <a href="/companies">Companies</a>
-              <a href="/about">About</a>
-              {session ? (
-                <>
-                  <a href="/admin">Admin</a>
-                  <Button onClick={handleLogout}>Logout</Button>
-                </>
-              ) : (
-                <a href="/admin/login">Admin Login</a>
-              )}
-            </nav>
-          </SheetContent>
-        </Sheet>
+          )}
+        </div>
+        <div className="md:hidden">
+          <Sheet>
+            <SheetTrigger asChild>
+              <Button variant="outline">
+                <Menu className="h-6 w-6" />
+              </Button>
+            </SheetTrigger>
+            <SheetContent>
+              <nav className="flex flex-col space-y-4 mt-8">
+                <a href="/internships">Stages</a>
+                <a href="/companies">Entreprises</a>
+                <a href="/about">À Propos</a>
+                {session ? (
+                  <>
+                    <a href="/admin">Admin</a>
+                    <Button onClick={handleLogout}>Déconnexion</Button>
+                  </>
+                ) : (
+                  <a href="/admin/login">Admin Login</a>
+                )}
+              </nav>
+            </SheetContent>
+          </Sheet>
+        </div>
       </div>
     </header>
   )

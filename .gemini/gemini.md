@@ -52,3 +52,5 @@ The goal is to build an internship job board.
 - **Admin Password:** Stored in an environment variable, not in Supabase Auth for Phase 1.
 - **SEO:** Job pages should be server-side rendered (SSR) for better SEO.
 - **Responsive Design:** The application should be mobile-friendly.
+- **App content language:** The application should be written in french as it is made for french speaking users.
+

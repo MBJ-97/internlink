@@ -20,7 +20,7 @@ const InternshipsPage = async () => {
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold mb-8">Internship Offers</h1>
+      <h1 className="text-3xl font-bold mb-8">Offres de Stage</h1>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {offers.map((offer) => (
           <Card key={offer.id}>
@@ -31,13 +31,13 @@ const InternshipsPage = async () => {
             <CardContent>
               <p className="font-semibold">{offer.field}</p>
               <p className="text-sm text-gray-500">{offer.location}</p>
-              <p className="text-sm text-gray-500">Duration: {offer.duration}</p>
+              <p className="text-sm text-gray-500">Durée : {offer.duration}</p>
               <p className="mt-4">{offer.description}</p>
             </CardContent>
             <CardFooter className="flex justify-between">
-              <p className="text-sm text-gray-500">Posted at: {new Date(offer.created_at).toLocaleDateString()}</p>
+              <p className="text-sm text-gray-500">Publié le : {new Date(offer.created_at).toLocaleDateString()}</p>
               <Button asChild>
-                <a href={`/internships/${offer.id}`}>Apply</a>
+                <a href={`/internships/${offer.id}`}>Postuler</a>
               </Button>
             </CardFooter>
           </Card>

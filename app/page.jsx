@@ -9,7 +9,7 @@ export default function Home() {
   return (
     <main>
       <div
-        className="flex min-h-[600px] flex-col gap-6 bg-cover bg-center bg-no-repeat items-center justify-center p-4 mx-4 md:mx-16 rounded-3xl"
+        className="flex min-h-[600px] flex-col gap-6 bg-cover bg-center bg-no-repeat items-center justify-center p-4 mx-4 md:mx-16 my-16 rounded-3xl"
         style={{
           backgroundImage:
             "linear-gradient(rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.8) 100%), url(/hero-image.jpg)",
@@ -19,14 +19,13 @@ export default function Home() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="flex flex-col gap-2 text-center"
+          className="flex flex-col gap-2 text-center max-w-3xl"
         >
-          <h1 className="text-white text-4xl font-black leading-tight tracking-[-0.033em] sm:text-5xl">
-            Unlock Your Potential with Real-World Experience
+          <h1 className="text-white text-5xl font-black leading-tight tracking-[-0.033em] sm:text-6xl">
+            Libérez Votre Potentiel avec une Expérience Concrète
           </h1>
-          <h2 className="text-white text-sm font-normal leading-normal sm:text-base">
-            Connect with leading companies and find internships that match your
-            skills and career goals.
+          <h2 className="text-white text-base font-normal leading-normal sm:text-lg">
+            Connectez-vous avec des entreprises de premier plan et trouvez des stages qui correspondent à vos compétences et à vos objectifs de carrière.
           </h2>
         </motion.div>
         <motion.div
@@ -37,12 +36,12 @@ export default function Home() {
         >
           <motion.div whileHover={{ y: -2 }} transition={{ duration: 0.2 }} className="w-full">
             <Button asChild size="lg" className="bg-green-500 hover:bg-green-600 text-white w-full font-bold">
-              <a href="/admin">Add an Internship Offer</a>
+              <a href="/admin">Ajouter une Offre de Stage</a>
             </Button>
           </motion.div>
           <motion.div whileHover={{ y: -2 }} transition={{ duration: 0.2 }} className="w-full">
             <Button className="bg-blue-500 hover:bg-blue-600 text-white w-full font-bold" asChild size="lg">
-              <a href="/internships">Find Internships</a>
+              <a href="/internships">Trouver des Stages</a>
             </Button>
           </motion.div>
         </motion.div>
@@ -50,14 +49,14 @@ export default function Home() {
 
       <div className="px-8 flex flex-1 justify-center py-5">
         <div className="layout-content-container flex flex-col max-w-[960px] flex-1">
-          <h2 className="text-[#0c151d] text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">Benefits for Employers</h2>
-          <div className="flex flex-col gap-10 px-4 py-10">
+          <h2 className="text-[#0c151d] text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pt-5">Avantages pour les Employeurs</h2>
+          <div className="flex flex-col gap-10 px-4 py-4">
             <div className="flex flex-col gap-4">
               <h1 className="text-[#0c151d] tracking-light text-[32px] font-bold leading-tight sm:text-4xl max-w-[720px]">
-                Empower Your Future Workforce
+                Renforcez Votre Future Main-d'œuvre
               </h1>
               <p className="text-[#0c151d] text-base font-normal leading-normal max-w-[720px]">
-                Find the best interns to contribute to your company's success and build a strong talent pipeline.
+                Trouvez les meilleurs stagiaires pour contribuer au succès de votre entreprise et bâtir un solide vivier de talents.
               </p>
             </div>
             <motion.div
@@ -68,30 +67,35 @@ export default function Home() {
             >
               <BenefitCard
                 icon={<UsersIcon className="h-6 w-6 text-[#0c151d]" />}
-                title="Access Talented Students"
-                description="Connect with a diverse pool of ambitious students seeking real-world experience."
+                title="Accédez à des Étudiants Talentueux"
+                description="Connectez-vous avec un bassin diversifié d'étudiants ambitieux à la recherche d'une expérience concrète."
               />
               <BenefitCard
                 icon={<ChartBarIcon className="h-6 w-6 text-[#0c151d]" />}
-                title="Enhance Employer Branding"
-                description="Showcase your company culture and values to attract top talent."
+                title="Améliorez Votre Marque Employeur"
+                description="Mettez en valeur la culture et les valeurs de votre entreprise pour attirer les meilleurs talents."
               />
               <BenefitCard
                 icon={<MegaphoneIcon className="h-6 w-6 text-[#0c151d]" />}
-                title="Streamlined Recruitment"
-                description="Simplify your internship program with our easy-to-use platform."
+                title="Recrutement Simplifié"
+                description="Simplifiez votre programme de stage grâce à notre plateforme facile à utiliser."
               />
             </motion.div>
+            <div className="flex justify-center mt-8"> {/* Centering div */}
+              <Button asChild size="lg" className="bg-green-500 hover:bg-green-600 text-white font-bold">
+                <a href="/admin">Ajouter une Offre de Stage</a>
+              </Button>
+            </div>
           </div>
 
-          <h2 className="text-[#0c151d] text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">Benefits for Students</h2>
-          <div className="flex flex-col gap-10 px-4 py-10">
+          <h2 className="text-[#0c151d] text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pt-5 mt-16">Avantages pour les Étudiants</h2>
+          <div className="flex flex-col gap-10 px-4 py-4">
             <div className="flex flex-col gap-4">
               <h1 className="text-[#0c151d] tracking-light text-[32px] font-bold leading-tight sm:text-4xl max-w-[720px]">
-                Launch Your Career with Confidence
+                Lancez Votre Carrière en Toute Confiance
               </h1>
               <p className="text-[#0c151d] text-base font-normal leading-normal max-w-[720px]">
-                Find the perfect internship to kickstart your career and gain valuable industry experience.
+                Trouvez le stage idéal pour démarrer votre carrière et acquérir une précieuse expérience industrielle.
               </p>
             </div>
             <motion.div
@@ -102,15 +106,20 @@ export default function Home() {
             >
               <BenefitCard
                 icon={<MagnifyingGlassIcon className="h-6 w-6 text-[#0c151d]" />}
-                title="Easy Internship Search"
-                description="Find internships that match your skills and interests with our intuitive search tools."
+                title="Recherche de Stage Facile"
+                description="Trouvez des stages qui correspondent à vos compétences et à vos intérêts grâce à nos outils de recherche intuitifs."
               />
               <BenefitCard
                 icon={<BriefcaseIcon className="h-6 w-6 text-[#0c151d]" />}
-                title="Bridge to Professional World"
-                description="Gain valuable experience and build your resume with real-world projects."
+                title="Pont vers le Monde Professionnel"
+                description="Acquérez une expérience précieuse et construisez votre CV avec des projets concrets."
               />
             </motion.div>
+            <div className="flex justify-center mt-8"> {/* Centering div */}
+              <Button asChild size="lg" className="bg-blue-500 hover:bg-blue-600 text-white font-bold">
+                <a href="/internships">Trouver des Stages</a>
+              </Button>
+            </div>
           </div>
         </div>
       </div>
