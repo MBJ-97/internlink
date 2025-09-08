@@ -34,7 +34,7 @@ const Header = () => {
       <div className="mx-4 md:mx-16 flex justify-between items-center">
         <div>
           <a href="/">
-            <img src="/internlink_logo.png" alt="InternLink Logo" width={84} height={28} />
+            <img src="/internlink_logo.png" alt="InternLink Logo" width={64} height={21} />
           </a>
         </div>
         <nav className="hidden md:flex space-x-4">

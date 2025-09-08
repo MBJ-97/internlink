@@ -1,0 +1,78 @@
+'use client'
+
+import { updateCompany } from '@/app/admin/actions'
+import Link from 'next/link'
+import { useActionState, useEffect, useState, use } from 'react'
+import { supabase } from '@/lib/supabase'
+
+function EditCompanyPage({ params }) {
+  const { id } = use(params)
+  const [company, setCompany] = useState(null)
+  const [state, formAction] = useActionState(updateCompany, { success: false, error: null, data: null })
+
+  useEffect(() => {
+    async function fetchCompany() {
+      const { data } = await supabase.from('companies').select('*').eq('id', id).single()
+      setCompany(data)
+    }
+    if (id) {
+      fetchCompany()
+    }
+  }, [id])
+
+  if (!company) {
+    return <div>Loading...</div>
+  }
+
+  return (
+    <div className="min-h-screen bg-gray-50 flex flex-col justify-center items-center">
+      <div className="max-w-md w-full bg-white p-8 rounded-lg shadow-md">
+        <Link href="/admin/companies" className="text-gray-500 hover:text-gray-700 mb-4 inline-block">
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 inline-block mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+          </svg>
+          Back to Companies
+        </Link>
+        <h1 className="text-2xl font-bold mb-4 text-center">Edit Company</h1>
+        <form action={formAction} className="space-y-4">
+          <input type="hidden" name="id" value={company.id} />
+          <div>
+            <label htmlFor="name" className="block text-sm font-medium text-gray-700">
+              Company Name
+            </label>
+            <input
+              type="text"
+              name="name"
+              id="name"
+              required
+              defaultValue={company.name}
+              className="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            />
+          </div>
+          <div>
+            <label htmlFor="website" className="block text-sm font-medium text-gray-700">
+              Website
+            </label>
+            <input
+              type="url"
+              name="website"
+              id="website"
+              defaultValue={company.website}
+              className="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            />
+          </div>
+          <button
+            type="submit"
+            className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+          >
+            Update Company
+          </button>
+          {state.success && <p className="text-green-500 text-center mt-4">Company updated successfully!</p>}
+          {state.error && <p className="text-red-500 text-center mt-4">{state.error}</p>}
+        </form>
+      </div>
+    </div>
+  )
+}
+
+export default EditCompanyPage

@@ -1,4 +1,5 @@
 
+import Link from 'next/link'
 import { createServerClient } from '@supabase/ssr'
 import { cookies } from 'next/headers'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
@@ -32,7 +33,20 @@ const AdminPage = async () => {
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold mb-8">Admin Dashboard</h1>
+      <div className="flex justify-between items-center mb-8">
+        <h1 className="text-3xl font-bold">Admin Dashboard</h1>
+        <div className="flex gap-4">
+            <Link href="/admin/companies" className="bg-gray-600 text-white px-4 py-2 rounded-md hover:bg-gray-700">
+              View Companies
+            </Link>
+            <Link href="/admin/add-company" className="bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700">
+              Add Company
+            </Link>
+            <Link href="/admin/add-offer" className="bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700">
+              Add Internship Offer
+            </Link>
+        </div>
+      </div>
       
       <Table>
         <TableHeader>
@@ -43,6 +57,7 @@ const AdminPage = async () => {
             <TableHead>Field</TableHead>
             <TableHead>Duration</TableHead>
             <TableHead>Active</TableHead>
+            <TableHead>Actions</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -55,6 +70,11 @@ const AdminPage = async () => {
               <TableCell>{internship.duration}</TableCell>
               <TableCell>
                 <IsActiveToggle internship={internship} />
+              </TableCell>
+              <TableCell>
+                <Link href={`/admin/internships/${internship.id}/edit`} className="text-blue-500 hover:underline">
+                  Edit
+                </Link>
               </TableCell>
             </TableRow>
           ))}
