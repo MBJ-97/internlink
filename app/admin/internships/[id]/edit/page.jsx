@@ -4,6 +4,8 @@ import { updateInternship } from '@/app/admin/actions'
 import Link from 'next/link'
 import { useActionState, useEffect, useState, use } from 'react'
 import { supabase } from '@/lib/supabase'
+import wilayas from "@/lib/wilayas";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select.tsx";
 
 function EditInternshipPage({ params }) {
   const { id } = use(params)
@@ -77,13 +79,18 @@ function EditInternshipPage({ params }) {
             <label htmlFor="location" className="block text-sm font-medium text-foreground">
               Location
             </label>
-            <input
-              type="text"
-              name="location"
-              id="location"
-              defaultValue={internship.location}
-              className="mt-1 block w-full px-3 py-2 bg-background border border-border rounded-md shadow-sm focus:outline-none focus:ring-ring focus:border-primary sm:text-sm"
-            />
+            <Select name="location" id="location" defaultValue={internship.location}>
+              <SelectTrigger className="w-full">
+                <SelectValue placeholder="Select a location" />
+              </SelectTrigger>
+              <SelectContent>
+                {wilayas.map((wilaya) => (
+                  <SelectItem key={wilaya} value={wilaya}>
+                    {wilaya}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
           </div>
           <div>
             <label htmlFor="field" className="block text-sm font-medium text-foreground">

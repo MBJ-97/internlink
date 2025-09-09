@@ -5,6 +5,8 @@ import Link from 'next/link'
 import { useActionState } from 'react'
 import { useEffect, useRef, useState } from 'react'
 import { supabase } from '@/lib/supabase'
+import wilayas from "@/lib/wilayas";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select.tsx";
 
 function AddOfferPage() {
   const [state, formAction] = useActionState(addInternship, { success: false, error: null, data: null })
@@ -70,12 +72,18 @@ function AddOfferPage() {
             <label htmlFor="location" className="block text-sm font-medium text-foreground">
               Location
             </label>
-            <input
-              type="text"
-              name="location"
-              id="location"
-              className="mt-1 block w-full px-3 py-2 bg-background border border-border rounded-md shadow-sm focus:outline-none focus:ring-ring focus:border-primary sm:text-sm"
-            />
+            <Select name="location" id="location">
+              <SelectTrigger className="w-full">
+                <SelectValue placeholder="Select a location" />
+              </SelectTrigger>
+              <SelectContent>
+                {wilayas.map((wilaya) => (
+                  <SelectItem key={wilaya} value={wilaya}>
+                    {wilaya}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
           </div>
           <div>
             <label htmlFor="field" className="block text-sm font-medium text-foreground">

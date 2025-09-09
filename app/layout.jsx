@@ -1,10 +1,10 @@
-import { Space_Grotesk } from "next/font/google";
+import { DM_Sans } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
-const space_grotesk = Space_Grotesk({
-  variable: "--font-space-grotesk",
+const dm_sans = DM_Sans({
+  variable: "--font-dm-sans",
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700"],
 });
@@ -17,7 +17,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={`${space_grotesk.variable} antialiased`}>
+      <body className={`${dm_sans.variable} antialiased`}>
         <Header />
         <main>{children}</main>
         <Footer />
