@@ -33,7 +33,7 @@ const CompaniesPage = async () => {
     <div className="container mx-auto px-4 py-8">
       <div className="flex justify-between items-center mb-8">
         <h1 className="text-3xl font-bold">Companies</h1>
-        <Link href="/admin" className="text-gray-500 hover:text-gray-700">
+        <Link href="/admin" className="text-muted-foreground hover:text-foreground">
           &larr; Back to Dashboard
         </Link>
       </div>
@@ -50,12 +50,12 @@ const CompaniesPage = async () => {
             <TableRow key={company.id}>
               <TableCell>{company.name}</TableCell>
               <TableCell>
-                <a href={company.website} target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:underline">
+                <a href={company.website} target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">
                   {company.website}
                 </a>
               </TableCell>
               <TableCell>
-                <Link href={`/admin/companies/${company.id}/edit`} className="text-blue-500 hover:underline">
+                <Link href={`/admin/companies/${company.id}/edit`} className="text-primary hover:underline">
                   Edit
                 </Link>
               </TableCell>

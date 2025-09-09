@@ -53,7 +53,7 @@ export default function LoginPage() {
                 onChange={(e) => setPassword(e.target.value)}
                 required
               />
-              {error && <p className="text-red-500">{error}</p>}
+              {error && <p className="text-destructive">{error}</p>}
               <Button type="submit" className="w-full">
                 Login
               </Button>
