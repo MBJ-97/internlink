@@ -38,7 +38,7 @@ const Header = () => {
           </a>
         </div>
         <nav className="hidden md:flex space-x-4">
-          <a href="/internships">Stages</a>
+          <a href="/stages">Stages</a>
           <a href="/companies">Entreprises</a>
           <a href="/about">À Propos</a>
         </nav>
@@ -51,9 +51,7 @@ const Header = () => {
               <Button onClick={handleLogout}>Déconnexion</Button>
             </>
           ) : (
-            <Button variant="outline" asChild>
-              <a href="/admin/login">Admin Login</a>
-            </Button>
+            null
           )}
         </div>
         <div className="md:hidden">
@@ -65,7 +63,7 @@ const Header = () => {
             </SheetTrigger>
             <SheetContent>
               <nav className="flex flex-col space-y-4 mt-8">
-                <a href="/internships">Stages</a>
+                <a href="/stages">Stages</a>
                 <a href="/companies">Entreprises</a>
                 <a href="/about">À Propos</a>
                 {session ? (
@@ -74,7 +72,7 @@ const Header = () => {
                     <Button onClick={handleLogout}>Déconnexion</Button>
                   </>
                 ) : (
-                  <a href="/admin/login">Admin Login</a>
+                  null
                 )}
               </nav>
             </SheetContent>

@@ -55,7 +55,7 @@ const CompaniesPage = async () => {
                 </a>
               </TableCell>
               <TableCell>
-                <Link href={`/admin/companies/${company.id}/edit`} className="text-primary hover:underline">
+                <Link href={`/admin/entreprises/${company.id}/modifier`} className="text-primary hover:underline">
                   Edit
                 </Link>
               </TableCell>

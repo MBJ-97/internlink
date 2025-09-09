@@ -33,11 +33,11 @@ export async function middleware(req) {
 
   const { data: { session } } = await supabase.auth.getSession()
 
-  if (!session && req.nextUrl.pathname.startsWith('/admin') && req.nextUrl.pathname !== '/admin/login') {
-    return NextResponse.redirect(new URL('/admin/login', req.url))
+  if (!session && req.nextUrl.pathname.startsWith('/admin') && req.nextUrl.pathname !== '/admin/connexion') {
+    return NextResponse.redirect(new URL('/admin/connexion', req.url))
   }
 
-  if (session && req.nextUrl.pathname === '/admin/login') {
+  if (session && req.nextUrl.pathname === '/admin/connexion') {
     return NextResponse.redirect(new URL('/admin', req.url))
   }
 
@@ -45,5 +45,5 @@ export async function middleware(req) {
 }
 
 export const config = {
-  matcher: ['/admin/:path*', '/admin/login'],
+  matcher: ['/admin/:path*', '/admin/connexion'],
 }

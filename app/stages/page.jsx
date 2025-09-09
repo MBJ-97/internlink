@@ -37,7 +37,7 @@ const InternshipsPage = async () => {
             <CardFooter className="flex justify-between">
               <p className="text-sm text-muted-foreground">Publié le : {new Date(offer.created_at).toLocaleDateString()}</p>
               <Button asChild>
-                <a href={`/internships/${offer.id}`}>Postuler</a>
+                <a href={`/stages/${offer.id}`}>Postuler</a>
               </Button>
             </CardFooter>
           </Card>

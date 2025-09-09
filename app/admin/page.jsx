@@ -36,13 +36,13 @@ const AdminPage = async () => {
       <div className="flex justify-between items-center mb-8">
         <h1 className="text-3xl font-bold">Admin Dashboard</h1>
         <div className="flex gap-4">
-            <Link href="/admin/companies" className="bg-secondary text-secondary-foreground px-4 py-2 rounded-md hover:bg-secondary/90">
+            <Link href="/admin/entreprises" className="bg-secondary text-secondary-foreground px-4 py-2 rounded-md hover:bg-secondary/90">
               View Companies
             </Link>
-            <Link href="/admin/add-company" className="bg-primary text-primary-foreground px-4 py-2 rounded-md hover:bg-primary/90">
+            <Link href="/admin/ajouter-entreprise" className="bg-primary text-primary-foreground px-4 py-2 rounded-md hover:bg-primary/90">
               Add Company
             </Link>
-            <Link href="/admin/add-offer" className="bg-primary text-primary-foreground px-4 py-2 rounded-md hover:bg-primary/90">
+            <Link href="/admin/ajouter-offre" className="bg-primary text-primary-foreground px-4 py-2 rounded-md hover:bg-primary/90">
               Add Internship Offer
             </Link>
         </div>
@@ -72,7 +72,7 @@ const AdminPage = async () => {
                 <IsActiveToggle internship={internship} />
               </TableCell>
               <TableCell>
-                <Link href={`/admin/internships/${internship.id}/edit`} className="text-primary hover:underline">
+                <Link href={`/admin/offres/${internship.id}/modifier`} className="text-primary hover:underline">
                   Edit
                 </Link>
               </TableCell>

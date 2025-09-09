@@ -41,7 +41,7 @@ export default function Home() {
           </motion.div>
           <motion.div whileHover={{ y: -2 }} transition={{ duration: 0.2 }} className="w-full">
             <Button className="bg-secondary hover:bg-secondary/90 text-secondary-foreground w-full font-bold" asChild size="lg">
-              <a href="/internships">Trouver des Stages</a>
+              <a href="/stages">Trouver des Stages</a>
             </Button>
           </motion.div>
         </motion.div>
@@ -117,7 +117,7 @@ export default function Home() {
             </motion.div>
             <div className="flex justify-center mt-8"> {/* Centering div */}
               <Button asChild size="lg" className="bg-secondary hover:bg-secondary/90 text-secondary-foreground font-bold">
-                <a href="/internships">Trouver des Stages</a>
+                <a href="/stages">Trouver des Stages</a>
               </Button>
             </div>
           </div>
