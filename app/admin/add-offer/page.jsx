@@ -2,12 +2,12 @@
 
 import { addInternship } from '../actions'
 import Link from 'next/link'
-import { useFormState } from 'react-dom'
+import { useActionState } from 'react'
 import { useEffect, useRef, useState } from 'react'
 import { supabase } from '@/lib/supabase'
 
 function AddOfferPage() {
-  const [state, formAction] = useFormState(addInternship, { success: false, error: null, data: null })
+  const [state, formAction] = useActionState(addInternship, { success: false, error: null, data: null })
   const formRef = useRef(null)
   const [companies, setCompanies] = useState([])
 

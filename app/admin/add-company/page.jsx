@@ -2,11 +2,10 @@
 
 import { addCompany } from '../actions'
 import Link from 'next/link'
-import { useFormState } from 'react-dom'
-import { useEffect, useRef } from 'react'
+import { useActionState, useEffect, useRef } from 'react'
 
 function AddCompanyPage() {
-  const [state, formAction] = useFormState(addCompany, { success: false, error: null, data: null })
+  const [state, formAction] = useActionState(addCompany, { success: false, error: null, data: null })
   const formRef = useRef(null)
 
   useEffect(() => {
