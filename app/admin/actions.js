@@ -5,6 +5,8 @@ import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase-server";
 
 export async function addCompany(data) {
+  console.log("Server-side data (addCompany):"); // Add this line
+  console.log(data); // Add this line
   const supabase = createClient();
 
   const name = data.name;
