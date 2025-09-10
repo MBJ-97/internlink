@@ -30,9 +30,9 @@ function AddCompanyPage() {
         <form ref={formRef} onSubmit={async (e) => {
           e.preventDefault();
           const formData = new FormData(e.currentTarget);
-          const data = Object.fromEntries(formData.entries());
-          console.log("Client-side data:", data); // Add this line
-          await formAction(data);
+          console.log("Client-side FormData (addCompany):"); // Add this line
+          console.log(formData); // Add this line
+          await formAction(formData);
         }} className="space-y-4">
           <div>
             <label htmlFor="name" className="block text-sm font-medium text-foreground">

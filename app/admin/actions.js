@@ -4,17 +4,17 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase-server";
 
-export async function addCompany(data) {
-  console.log("Server-side data (addCompany):"); // Add this line
-  console.log(data); // Add this line
+export async function addCompany(formData) {
+  console.log("Server-side FormData (addCompany):");
+  console.log(formData);
   const supabase = createClient();
 
-  const name = data.name;
-  const email = data.email;
-  const website = data.website;
-  const description = data.description;
-  const address = data.address;
-  const phone = data.phone;
+  const name = formData.get("name");
+  const email = formData.get("email");
+  const website = formData.get("website");
+  const description = formData.get("description");
+  const address = formData.get("address");
+  const phone = formData.get("phone");
 
   const { error } = await supabase.from("companies").insert({
     name,
@@ -34,16 +34,16 @@ export async function addCompany(data) {
   return { success: true, redirectTo: "/admin/entreprises" };
 }
 
-export async function updateCompany(data) {
+export async function updateCompany(formData) {
   const supabase = createClient();
 
-  const id = data.id;
-  const name = data.name;
-  const email = data.email;
-  const website = data.website;
-  const description = data.description;
-  const address = data.address;
-  const phone = data.phone;
+  const id = formData.get("id");
+  const name = formData.get("name");
+  const email = formData.get("email");
+  const website = formData.get("website");
+  const description = formData.get("description");
+  const address = formData.get("address");
+  const phone = formData.get("phone");
 
   const { error } = await supabase
     .from("companies")
@@ -79,19 +79,19 @@ export async function deleteCompany(id) {
   revalidatePath("/admin/entreprises");
 }
 
-export async function addInternship(data) {
-  console.log("Server-side data (addInternship):"); // Add this line
-  console.log(data); // Add this line
+export async function addInternship(formData) {
+  console.log("Server-side FormData (addInternship):");
+  console.log(formData);
   const supabase = createClient();
 
-  const title = data.title;
-  const description = data.description;
-  const company_id = data.company_id;
-  const location = data.location;
-  const duration = data.duration;
-  const salary = data.salary;
-  const application_link = data.application_link;
-  const is_active = data.is_active;
+  const title = formData.get("title");
+  const description = formData.get("description");
+  const company_id = formData.get("company_id");
+  const location = formData.get("location");
+  const duration = formData.get("duration");
+  const salary = formData.get("salary");
+  const application_link = formData.get("application_link");
+  const is_active = formData.get("is_active") === "on";
 
   const { error } = await supabase.from("offers").insert({
     title,
@@ -113,18 +113,18 @@ export async function addInternship(data) {
   return { success: true, redirectTo: "/admin/offres" };
 }
 
-export async function updateInternship(data) {
+export async function updateInternship(formData) {
   const supabase = createClient();
 
-  const id = data.id;
-  const title = data.title;
-  const description = data.description;
-  const company_id = data.company_id;
-  const location = data.location;
-  const duration = data.duration;
-  const salary = data.salary;
-  const application_link = data.application_link;
-  const is_active = data.is_active;
+  const id = formData.get("id");
+  const title = formData.get("title");
+  const description = formData.get("description");
+  const company_id = formData.get("company_id");
+  const location = formData.get("location");
+  const duration = formData.get("duration");
+  const salary = formData.get("salary");
+  const application_link = formData.get("application_link");
+  const is_active = formData.get("is_active") === "on";
 
   const { error } = await supabase
     .from("offers")
