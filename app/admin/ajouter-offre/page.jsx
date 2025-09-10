@@ -43,8 +43,8 @@ function AddOfferPage() {
         <form ref={formRef} onSubmit={async (e) => {
           e.preventDefault();
           const formData = new FormData(e.currentTarget);
-          console.log("Client-side FormData (addInternship):"); // Add this line
-          console.log(formData); // Add this line
+          console.log("Client-side FormData (addInternship):");
+          console.log(Object.fromEntries(formData.entries()));
           await formAction(formData);
         }} className="space-y-4">
           <div>
