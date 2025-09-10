@@ -57,7 +57,8 @@ function EditCompanyPage({ params }) {
         <form onSubmit={async (e) => {
           e.preventDefault();
           const formData = new FormData(e.currentTarget);
-          await formAction(formData);
+          const data = Object.fromEntries(formData.entries());
+          await formAction(data);
         }} className="space-y-4">
           <input type="hidden" name="id" value={company.id} />
           <div>

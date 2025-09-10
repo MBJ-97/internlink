@@ -67,7 +67,9 @@ function EditInternshipPage({ params }) {
         <form onSubmit={async (e) => {
           e.preventDefault();
           const formData = new FormData(e.currentTarget);
-          await formAction(formData);
+          const data = Object.fromEntries(formData.entries());
+          data.is_active = formData.get("is_active") === "on";
+          await formAction(data);
         }} className="space-y-4">
           <input type="hidden" name="id" value={internship.id} />
           <div>

@@ -4,15 +4,15 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase-server";
 
-export async function addCompany(formData) {
+export async function addCompany(data) {
   const supabase = createClient();
 
-  const name = formData.get("name");
-  const email = formData.get("email");
-  const website = formData.get("website");
-  const description = formData.get("description");
-  const address = formData.get("address");
-  const phone = formData.get("phone");
+  const name = data.name;
+  const email = data.email;
+  const website = data.website;
+  const description = data.description;
+  const address = data.address;
+  const phone = data.phone;
 
   const { error } = await supabase.from("companies").insert({
     name,
@@ -32,16 +32,16 @@ export async function addCompany(formData) {
   return { success: true, redirectTo: "/admin/entreprises" };
 }
 
-export async function updateCompany(formData) {
+export async function updateCompany(data) {
   const supabase = createClient();
 
-  const id = formData.get("id");
-  const name = formData.get("name");
-  const email = formData.get("email");
-  const website = formData.get("website");
-  const description = formData.get("description");
-  const address = formData.get("address");
-  const phone = formData.get("phone");
+  const id = data.id;
+  const name = data.name;
+  const email = data.email;
+  const website = data.website;
+  const description = data.description;
+  const address = data.address;
+  const phone = data.phone;
 
   const { error } = await supabase
     .from("companies")
@@ -77,17 +77,17 @@ export async function deleteCompany(id) {
   revalidatePath("/admin/entreprises");
 }
 
-export async function addInternship(formData) {
+export async function addInternship(data) {
   const supabase = createClient();
 
-  const title = formData.get("title");
-  const description = formData.get("description");
-  const company_id = formData.get("company_id");
-  const location = formData.get("location");
-  const duration = formData.get("duration");
-  const salary = formData.get("salary");
-  const application_link = formData.get("application_link");
-  const is_active = formData.get("is_active") === "on";
+  const title = data.title;
+  const description = data.description;
+  const company_id = data.company_id;
+  const location = data.location;
+  const duration = data.duration;
+  const salary = data.salary;
+  const application_link = data.application_link;
+  const is_active = data.is_active;
 
   const { error } = await supabase.from("offers").insert({
     title,
@@ -109,18 +109,18 @@ export async function addInternship(formData) {
   return { success: true, redirectTo: "/admin/offres" };
 }
 
-export async function updateInternship(formData) {
+export async function updateInternship(data) {
   const supabase = createClient();
 
-  const id = formData.get("id");
-  const title = formData.get("title");
-  const description = formData.get("description");
-  const company_id = formData.get("company_id");
-  const location = formData.get("location");
-  const duration = formData.get("duration");
-  const salary = formData.get("salary");
-  const application_link = formData.get("application_link");
-  const is_active = formData.get("is_active") === "on";
+  const id = data.id;
+  const title = data.title;
+  const description = data.description;
+  const company_id = data.company_id;
+  const location = data.location;
+  const duration = data.duration;
+  const salary = data.salary;
+  const application_link = data.application_link;
+  const is_active = data.is_active;
 
   const { error } = await supabase
     .from("offers")

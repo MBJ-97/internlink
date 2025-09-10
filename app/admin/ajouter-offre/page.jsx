@@ -43,7 +43,9 @@ function AddOfferPage() {
         <form ref={formRef} onSubmit={async (e) => {
           e.preventDefault();
           const formData = new FormData(e.currentTarget);
-          await formAction(formData);
+          const data = Object.fromEntries(formData.entries());
+          data.is_active = formData.get("is_active") === "on";
+          await formAction(data);
         }} className="space-y-4">
           <div>
             <label htmlFor="company_id" className="block text-sm font-medium text-foreground">
