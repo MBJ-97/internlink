@@ -1,6 +1,6 @@
 'use client'
 
-import { addCompany } from '../actions'
+import { addCompany } from "@/app/admin/actions";
 import Link from 'next/link'
 import { useActionState, useEffect, useRef } from 'react'
 

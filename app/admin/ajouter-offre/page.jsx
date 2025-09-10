@@ -1,6 +1,6 @@
 'use client'
 
-import { addInternship } from '../actions'
+import { addInternship } from '@/app/admin/actions'
 import Link from 'next/link'
 import { useActionState } from 'react'
 import { useEffect, useRef, useState } from 'react'
