@@ -3,16 +3,19 @@
 import { addCompany } from "@/app/admin/actions";
 import Link from 'next/link'
 import { useActionState, useEffect, useRef } from 'react'
+import { useRouter } from 'next/navigation'
 
 function AddCompanyPage() {
   const [state, formAction] = useActionState(addCompany, { success: false, error: null, data: null })
   const formRef = useRef(null)
+  const router = useRouter()
 
   useEffect(() => {
-    if (state.success) {
+    if (state.success && state.redirectTo) {
       formRef.current.reset()
+      router.push(state.redirectTo)
     }
-  }, [state.success])
+  }, [state.success, state.redirectTo, router])
 
   return (
     <div className="min-h-screen  flex flex-col justify-center items-center">

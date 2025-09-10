@@ -32,10 +32,10 @@ function EditInternshipPage({ params }) {
   }, [id])
 
   useEffect(() => {
-    if (state.success) {
-      router.refresh()
+    if (state.success && state.redirectTo) {
+      router.push(state.redirectTo)
     }
-  }, [state.success, router])
+  }, [state.success, state.redirectTo, router])
 
   if (!internship) {
     return (

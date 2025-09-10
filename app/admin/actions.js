@@ -29,7 +29,7 @@ export async function addCompany(formData) {
   }
 
   revalidatePath("/admin/entreprises");
-  redirect("/admin/entreprises");
+  return { success: true, redirectTo: "/admin/entreprises" };
 }
 
 export async function updateCompany(formData) {
@@ -61,7 +61,7 @@ export async function updateCompany(formData) {
   }
 
   revalidatePath("/admin/entreprises");
-  redirect("/admin/entreprises");
+  return { success: true, redirectTo: "/admin/entreprises" };
 }
 
 export async function deleteCompany(id) {
@@ -106,7 +106,7 @@ export async function addInternship(formData) {
   }
 
   revalidatePath("/admin/offres");
-  redirect("/admin/offres");
+  return { success: true, redirectTo: "/admin/offres" };
 }
 
 export async function updateInternship(formData) {
@@ -142,7 +142,7 @@ export async function updateInternship(formData) {
   }
 
   revalidatePath("/admin/offres");
-  redirect("/admin/offres");
+  return { success: true, redirectTo: "/admin/offres" };
 }
 
 export async function deleteInternship(id) {

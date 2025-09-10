@@ -7,11 +7,13 @@ import { useEffect, useRef, useState } from 'react'
 import { supabase } from '@/lib/supabase'
 import wilayas from "@/lib/wilayas";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select.tsx";
+import { useRouter } from 'next/navigation'
 
 function AddOfferPage() {
   const [state, formAction] = useActionState(addInternship, { success: false, error: null, data: null })
   const formRef = useRef(null)
   const [companies, setCompanies] = useState([])
+  const router = useRouter()
 
   useEffect(() => {
     async function fetchCompanies() {
@@ -22,10 +24,11 @@ function AddOfferPage() {
   }, [])
 
   useEffect(() => {
-    if (state.success) {
+    if (state.success && state.redirectTo) {
       formRef.current.reset()
+      router.push(state.redirectTo)
     }
-  }, [state.success])
+  }, [state.success, state.redirectTo, router])
 
   return (
     <div className="min-h-screen  flex flex-col justify-center items-center">
