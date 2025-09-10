@@ -40,7 +40,11 @@ function AddOfferPage() {
           Retour au tableau de bord
         </Link>
         <h1 className="text-2xl font-bold mb-4 text-center">Ajouter une nouvelle offre de stage</h1>
-        <form ref={formRef} action={formAction} className="space-y-4">
+        <form ref={formRef} onSubmit={async (e) => {
+          e.preventDefault();
+          const formData = new FormData(e.currentTarget);
+          await formAction(formData);
+        }} className="space-y-4">
           <div>
             <label htmlFor="company_id" className="block text-sm font-medium text-foreground">
               Entreprise
