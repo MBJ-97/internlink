@@ -26,7 +26,7 @@ const InternshipsPage = async () => {
           <Card key={offer.id}>
             <CardHeader>
               <CardTitle>{offer.title}</CardTitle>
-              <CardDescription>{offer.companies.name}</CardDescription>
+              <CardDescription>{offer.companies?.name || 'N/A'}</CardDescription>
             </CardHeader>
             <CardContent>
               <p className="font-semibold">{offer.field}</p>

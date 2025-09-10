@@ -3,10 +3,11 @@ import { supabase } from '@/lib/supabase'
 import { Button } from "@/components/ui/button"
 
 const OfferDetailsPage = async ({ params }) => {
+  const resolvedParams = await params;
   const { data: offer, error } = await supabase
     .from('offers')
     .select('*, companies(*)')
-    .eq('id', params.id)
+    .eq('id', resolvedParams.id)
     .single()
 
   if (error) {

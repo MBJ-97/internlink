@@ -35,12 +35,12 @@ export default function Home() {
           className="flex flex-col md:flex-row w-full max-w-[480px] gap-4 items-center"
         >
           <motion.div whileHover={{ y: -2 }} transition={{ duration: 0.2 }} className="w-full">
-            <Button asChild size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground w-full font-bold">
-              <a href="/admin">Ajouter une Offre de Stage</a>
+            <Button asChild size="lg" className="h-11 bg-primary hover:bg-primary/90 text-primary-foreground w-full font-bold">
+              <a href="/admin/ajouter-offre">Ajouter une Offre de Stage</a>
             </Button>
           </motion.div>
           <motion.div whileHover={{ y: -2 }} transition={{ duration: 0.2 }} className="w-full">
-            <Button className="bg-secondary hover:bg-secondary/90 text-secondary-foreground w-full font-bold" asChild size="lg">
+            <Button className="h-11 bg-secondary hover:bg-secondary/90 text-secondary-foreground w-full font-bold" asChild size="lg">
               <a href="/stages">Trouver des Stages</a>
             </Button>
           </motion.div>
@@ -83,7 +83,7 @@ export default function Home() {
             </motion.div>
             <div className="flex justify-center mt-8"> {/* Centering div */}
               <Button asChild size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground font-bold">
-                <a href="/admin">Ajouter une Offre de Stage</a>
+                <a href="/admin/ajouter-offre">Ajouter une Offre de Stage</a>
               </Button>
             </div>
           </div>

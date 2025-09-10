@@ -39,7 +39,7 @@ const Header = () => {
         </div>
         <nav className="hidden md:flex space-x-4">
           <a href="/stages">Stages</a>
-          <a href="/companies">Entreprises</a>
+          <a href="/entreprises">Entreprises</a>
           <a href="/about">À Propos</a>
         </nav>
         <div className='hidden md:flex space-x-2'>
@@ -64,7 +64,7 @@ const Header = () => {
             <SheetContent>
               <nav className="flex flex-col space-y-4 mt-8">
                 <a href="/stages">Stages</a>
-                <a href="/companies">Entreprises</a>
+                <a href="/entreprises">Entreprises</a>
                 <a href="/about">À Propos</a>
                 {session ? (
                   <>

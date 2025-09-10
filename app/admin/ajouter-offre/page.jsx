@@ -34,13 +34,13 @@ function AddOfferPage() {
           <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 inline-block mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
           </svg>
-          Back to Dashboard
+          Retour au tableau de bord
         </Link>
-        <h1 className="text-2xl font-bold mb-4 text-center">Add New Internship Offer</h1>
+        <h1 className="text-2xl font-bold mb-4 text-center">Ajouter une nouvelle offre de stage</h1>
         <form ref={formRef} action={formAction} className="space-y-4">
           <div>
             <label htmlFor="company_id" className="block text-sm font-medium text-foreground">
-              Company
+              Entreprise
             </label>
             <select
               name="company_id"
@@ -48,7 +48,7 @@ function AddOfferPage() {
               required
               className="mt-1 block w-full px-3 py-2 bg-background border border-border rounded-md shadow-sm focus:outline-none focus:ring-ring focus:border-primary sm:text-sm"
             >
-              <option value="">Select a company</option>
+              <option value="">Sélectionner une entreprise</option>
               {companies.map((company) => (
                 <option key={company.id} value={company.id}>
                   {company.name}
@@ -58,7 +58,7 @@ function AddOfferPage() {
           </div>
           <div>
             <label htmlFor="title" className="block text-sm font-medium text-foreground">
-              Internship Title
+              Titre du stage
             </label>
             <input
               type="text"
@@ -70,11 +70,11 @@ function AddOfferPage() {
           </div>
           <div>
             <label htmlFor="location" className="block text-sm font-medium text-foreground">
-              Location
+              Lieu
             </label>
             <Select name="location" id="location">
               <SelectTrigger className="w-full">
-                <SelectValue placeholder="Select a location" />
+                <SelectValue placeholder="Sélectionner un lieu" />
               </SelectTrigger>
               <SelectContent>
                 {wilayas.map((wilaya) => (
@@ -87,7 +87,7 @@ function AddOfferPage() {
           </div>
           <div>
             <label htmlFor="field" className="block text-sm font-medium text-foreground">
-              Field
+              Domaine
             </label>
             <input
               type="text"
@@ -99,7 +99,7 @@ function AddOfferPage() {
           </div>
           <div>
             <label htmlFor="duration" className="block text-sm font-medium text-foreground">
-              Duration
+              Durée
             </label>
             <input
               type="text"
@@ -123,7 +123,7 @@ function AddOfferPage() {
           </div>
           <div>
             <label htmlFor="apply_url" className="block text-sm font-medium text-foreground">
-              Apply URL
+              URL pour postuler
             </label>
             <input
               type="text"
@@ -137,9 +137,9 @@ function AddOfferPage() {
             type="submit"
             className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-primary-foreground bg-primary hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-ring"
           >
-            Add Internship
+            Ajouter le stage
           </button>
-          {state.success && <p className="text-green-500 text-center mt-4">Internship added successfully!</p>}
+          {state.success && <p className="text-green-500 text-center mt-4">Stage ajouté avec succès !</p>}
           {state.error && <p className="text-destructive text-center mt-4">{state.error}</p>}
         </form>
       </div>
