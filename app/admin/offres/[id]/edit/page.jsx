@@ -13,6 +13,7 @@ function EditInternshipPage({ params }) {
   const { id } = use(params)
   const [internship, setInternship] = useState(null)
   const [companies, setCompanies] = useState([])
+  const [selectedLocation, setSelectedLocation] = useState(""); // Add state for location
   const [state, formAction] = useActionState(updateInternship, { success: false, error: null, data: null })
   const router = useRouter()
 
@@ -30,6 +31,12 @@ function EditInternshipPage({ params }) {
       fetchCompanies()
     }
   }, [id])
+
+  useEffect(() => {
+    if (internship) { // Initialize selectedLocation when internship data is available
+      setSelectedLocation(internship.location);
+    }
+  }, [internship]);
 
   useEffect(() => {
     if (state.success && state.redirectTo) {
@@ -69,6 +76,8 @@ function EditInternshipPage({ params }) {
           const formData = new FormData(e.currentTarget);
           console.log("Client-side FormData (updateInternship):");
           console.log(Object.fromEntries(formData.entries()));
+          // Manually append selectedLocation to formData
+          formData.append("location", selectedLocation); // Add this line
           await formAction(formData);
         }} className="space-y-4">
           <input type="hidden" name="id" value={internship.id} />
@@ -107,7 +116,7 @@ function EditInternshipPage({ params }) {
             <label htmlFor="location" className="block text-sm font-medium text-foreground">
               Lieu
             </label>
-            <Select name="location" id="location" defaultValue={internship.location}>
+            <Select name="location" id="location" onValueChange={setSelectedLocation} value={selectedLocation}> {/* Add onValueChange and value */}
               <SelectTrigger className="w-full">
                 <SelectValue placeholder="Sélectionner un lieu" />
               </SelectTrigger>

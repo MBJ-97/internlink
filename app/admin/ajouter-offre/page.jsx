@@ -13,6 +13,7 @@ function AddOfferPage() {
   const [state, formAction] = useActionState(addInternship, { success: false, error: null, data: null })
   const formRef = useRef(null)
   const [companies, setCompanies] = useState([])
+  const [selectedLocation, setSelectedLocation] = useState(""); // Add state for location
   const router = useRouter()
 
   useEffect(() => {
@@ -43,6 +44,8 @@ function AddOfferPage() {
         <form ref={formRef} onSubmit={async (e) => {
           e.preventDefault();
           const formData = new FormData(e.currentTarget);
+          // Manually append selectedLocation to formData
+          formData.append("location", selectedLocation); // Add this line
           console.log("Client-side FormData (addInternship):");
           console.log(Object.fromEntries(formData.entries()));
           await formAction(formData);
@@ -81,7 +84,7 @@ function AddOfferPage() {
             <label htmlFor="location" className="block text-sm font-medium text-foreground">
               Lieu
             </label>
-            <Select name="location" id="location">
+            <Select name="location" id="location" onValueChange={setSelectedLocation} value={selectedLocation}> {/* Add onValueChange and value */}
               <SelectTrigger className="w-full">
                 <SelectValue placeholder="Sélectionner un lieu" />
               </SelectTrigger>
