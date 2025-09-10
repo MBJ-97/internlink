@@ -45,6 +45,8 @@ function AddOfferPage() {
           const formData = new FormData(e.currentTarget);
           const data = Object.fromEntries(formData.entries());
           data.is_active = formData.get("is_active") === "on";
+          console.log("Client-side data (addInternship):"); // Add this line
+          console.log(data); // Add this line
           await formAction(data);
         }} className="space-y-4">
           <div>

@@ -80,6 +80,8 @@ export async function deleteCompany(id) {
 }
 
 export async function addInternship(data) {
+  console.log("Server-side data (addInternship):"); // Add this line
+  console.log(data); // Add this line
   const supabase = createClient();
 
   const title = data.title;
