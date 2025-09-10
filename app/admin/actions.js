@@ -114,6 +114,7 @@ export async function addInternship(formData) {
   revalidatePath("/admin/offres");
   return { success: true, redirectTo: "/admin/offres" };
 }
+}
 
 export async function updateInternship(formData) {
   console.log("Server-side FormData (updateInternship):");
