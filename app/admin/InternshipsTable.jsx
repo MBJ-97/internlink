@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
 import IsActiveToggle from '@/components/IsActiveToggle'
 import { Button } from '@/components/ui/button'
+import { formatDate } from '@/lib/utils'
 import { deleteInternship } from '@/app/admin/actions'
 import { useActionState } from 'react'
 import { DeleteButton } from '@/components/DeleteButton';
@@ -33,6 +34,8 @@ const InternshipsTable = ({ internships }) => {
             <TableHead>Lieu</TableHead>
             <TableHead>Domaine</TableHead>
             <TableHead>Durée</TableHead>
+            <TableHead>Créé le</TableHead>
+            <TableHead>Dernière modification</TableHead>
             <TableHead>Actif</TableHead>
             <TableHead>Actions</TableHead>
           </TableRow>
@@ -45,6 +48,8 @@ const InternshipsTable = ({ internships }) => {
               <TableCell>{internship.location}</TableCell>
               <TableCell>{internship.field}</TableCell>
               <TableCell>{internship.duration}</TableCell>
+              <TableCell>{formatDate(internship.created_at)}</TableCell>
+              <TableCell>{formatDate(internship.updated_at)}</TableCell>
               <TableCell>
                 <IsActiveToggle internship={internship} />
               </TableCell>

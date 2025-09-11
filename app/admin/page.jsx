@@ -15,7 +15,7 @@ async function getInternships() {
       },
     }
   )
-  const { data, error } = await supabase.from('offers').select('*, companies(name)')
+  const { data, error } = await supabase.from('offers').select('*, companies(name)').order('created_at', { ascending: false })
 
   if (error) {
     console.error('Error fetching internships:', error)
