@@ -113,6 +113,7 @@ export async function addInternship(prevState, formData) {
   }
 
   revalidatePath("/admin");
+  revalidatePath("/stages");
   return { success: true, redirectTo: "/admin" };
 }
 
