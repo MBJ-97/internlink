@@ -6,7 +6,7 @@ import { useActionState } from 'react'
 import { useEffect, useRef, useState } from 'react'
 import { supabase } from '@/lib/supabase'
 import wilayas from "@/lib/wilayas";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select.tsx";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select.jsx";
 import { useRouter } from 'next/navigation'
 
 function AddOfferPage() {
