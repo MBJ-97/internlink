@@ -13,30 +13,28 @@ function EditInternshipPage({ params }) {
   const { id } = use(params)
   const [internship, setInternship] = useState(null)
   const [companies, setCompanies] = useState([])
-  const [selectedLocation, setSelectedLocation] = useState(""); // Add state for location
+  const [selectedLocation, setSelectedLocation] = useState("");
+  const [selectedCompanyId, setSelectedCompanyId] = useState(""); // New state for company_id
   const [state, formAction] = useActionState(updateInternship, { success: false, error: null, data: null })
   const router = useRouter()
 
   useEffect(() => {
-    async function fetchInternship() {
-      const { data } = await supabase.from('offers').select('*').eq('id', id).single()
-      setInternship(data)
+    async function fetchInternshipAndCompanies() {
+      const { data: internshipData } = await supabase.from('offers').select('*').eq('id', id).single()
+      setInternship(internshipData)
+      if (internshipData) {
+        setSelectedLocation(internshipData.location);
+        setSelectedCompanyId(internshipData.company_id); // Set initial company_id
+      }
+
+      const { data: companiesData } = await supabase.from('companies').select('id, name')
+      setCompanies(companiesData || [])
     }
-    async function fetchCompanies() {
-      const { data } = await supabase.from('companies').select('id, name')
-      setCompanies(data || [])
-    }
+
     if (id) {
-      fetchInternship()
-      fetchCompanies()
+      fetchInternshipAndCompanies()
     }
   }, [id])
-
-  useEffect(() => {
-    if (internship) { // Initialize selectedLocation when internship data is available
-      setSelectedLocation(internship.location);
-    }
-  }, [internship]);
 
   useEffect(() => {
     if (state.success && state.redirectTo) {
@@ -44,7 +42,7 @@ function EditInternshipPage({ params }) {
     }
   }, [state.success, state.redirectTo, router])
 
-  if (!internship) {
+  if (!internship || companies.length === 0) { // Check if companies are loaded too
     return (
       <div className="min-h-screen flex flex-col justify-center items-center">
         <div className="max-w-md w-full bg-card p-8 rounded-lg shadow-md space-y-4">
@@ -81,7 +79,8 @@ function EditInternshipPage({ params }) {
               name="company_id"
               id="company_id"
               required
-              defaultValue={internship.company_id}
+              value={selectedCompanyId} // Use value instead of defaultValue
+              onChange={(e) => setSelectedCompanyId(e.target.value)} // Add onChange handler
               className="mt-1 block w-full px-3 py-2 bg-background border border-border rounded-md shadow-sm focus:outline-none focus:ring-ring focus:border-primary sm:text-sm"
             >
               {companies.map((company) => (
