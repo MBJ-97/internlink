@@ -41,15 +41,7 @@ function AddOfferPage() {
           Retour au tableau de bord
         </Link>
         <h1 className="text-2xl font-bold mb-4 text-center">Ajouter une nouvelle offre de stage</h1>
-        <form ref={formRef} onSubmit={async (e) => {
-          e.preventDefault();
-          const formData = new FormData(e.currentTarget);
-          // Manually append selectedLocation to formData
-          formData.append("location", selectedLocation); // Add this line
-          console.log("Client-side FormData (addInternship):");
-          console.log(Object.fromEntries(formData.entries()));
-          await formAction(formData);
-        }} className="space-y-4">
+        <form ref={formRef} action={formAction} className="space-y-4">
           <div>
             <label htmlFor="company_id" className="block text-sm font-medium text-foreground">
               Entreprise
@@ -84,7 +76,7 @@ function AddOfferPage() {
             <label htmlFor="location" className="block text-sm font-medium text-foreground">
               Lieu
             </label>
-            <Select name="location" id="location" onValueChange={setSelectedLocation} value={selectedLocation}> {/* Add onValueChange and value */}
+            <Select onValueChange={setSelectedLocation} value={selectedLocation}>
               <SelectTrigger className="w-full">
                 <SelectValue placeholder="Sélectionner un lieu" />
               </SelectTrigger>
@@ -96,6 +88,7 @@ function AddOfferPage() {
                 ))}
               </SelectContent>
             </Select>
+            <input type="hidden" name="location" value={selectedLocation} />
           </div>
           <div>
             <label htmlFor="field" className="block text-sm font-medium text-foreground">
@@ -144,6 +137,18 @@ function AddOfferPage() {
               required
               className="mt-1 block w-full px-3 py-2 bg-background border border-border rounded-md shadow-sm focus:outline-none focus:ring-ring focus:border-primary sm:text-sm"
             />
+          </div>
+          <div>
+            <label htmlFor="is_active" className="flex items-center">
+              <input
+                type="checkbox"
+                name="is_active"
+                id="is_active"
+                defaultChecked
+                className="h-4 w-4 text-primary border-border rounded focus:ring-ring"
+              />
+              <span className="ml-2 text-sm text-foreground">Active</span>
+            </label>
           </div>
           <button
             type="submit"

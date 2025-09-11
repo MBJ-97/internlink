@@ -27,13 +27,7 @@ function AddCompanyPage() {
           Retour au tableau de bord
         </Link>
         <h1 className="text-2xl font-bold mb-4 text-center">Ajouter une nouvelle entreprise</h1>
-        <form ref={formRef} onSubmit={async (e) => {
-          e.preventDefault();
-          const formData = new FormData(e.currentTarget);
-          console.log("Client-side FormData (addCompany):"); // Add this line
-          console.log(formData); // Add this line
-          await formAction(formData);
-        }} className="space-y-4">
+        <form ref={formRef} action={formAction} className="space-y-4">
           <div>
             <label htmlFor="name" className="block text-sm font-medium text-foreground">
               Nom de l'entreprise

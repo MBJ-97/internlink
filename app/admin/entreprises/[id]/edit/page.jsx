@@ -54,13 +54,7 @@ function EditCompanyPage({ params }) {
           Retour aux entreprises
         </Link>
         <h1 className="text-2xl font-bold mb-4 text-center">Modifier l'entreprise</h1>
-        <form onSubmit={async (e) => {
-          e.preventDefault();
-          const formData = new FormData(e.currentTarget);
-          console.log("Client-side FormData (updateCompany):");
-          console.log(Object.fromEntries(formData.entries()));
-          await formAction(formData);
-        }} className="space-y-4">
+        <form action={formAction} className="space-y-4">
           <input type="hidden" name="id" value={company.id} />
           <div>
             <label htmlFor="name" className="block text-sm font-medium text-foreground">

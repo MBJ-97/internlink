@@ -71,15 +71,7 @@ function EditInternshipPage({ params }) {
           Retour au tableau de bord
         </Link>
         <h1 className="text-2xl font-bold mb-4 text-center">Modifier l'offre de stage</h1>
-        <form onSubmit={async (e) => {
-          e.preventDefault();
-          const formData = new FormData(e.currentTarget);
-          console.log("Client-side FormData (updateInternship):");
-          console.log(Object.fromEntries(formData.entries()));
-          // Manually append selectedLocation to formData
-          formData.append("location", selectedLocation); // Add this line
-          await formAction(formData);
-        }} className="space-y-4">
+        <form action={formAction} className="space-y-4">
           <input type="hidden" name="id" value={internship.id} />
           <div>
             <label htmlFor="company_id" className="block text-sm font-medium text-foreground">
@@ -116,7 +108,7 @@ function EditInternshipPage({ params }) {
             <label htmlFor="location" className="block text-sm font-medium text-foreground">
               Lieu
             </label>
-            <Select name="location" id="location" onValueChange={setSelectedLocation} value={selectedLocation}> {/* Add onValueChange and value */}
+            <Select onValueChange={setSelectedLocation} value={selectedLocation}>
               <SelectTrigger className="w-full">
                 <SelectValue placeholder="Sélectionner un lieu" />
               </SelectTrigger>
@@ -128,6 +120,7 @@ function EditInternshipPage({ params }) {
                 ))}
               </SelectContent>
             </Select>
+            <input type="hidden" name="location" value={selectedLocation} />
           </div>
           <div>
             <label htmlFor="field" className="block text-sm font-medium text-foreground">
@@ -180,6 +173,18 @@ function EditInternshipPage({ params }) {
               defaultValue={internship.apply_url}
               className="mt-1 block w-full px-3 py-2 bg-background border border-border rounded-md shadow-sm focus:outline-none focus:ring-ring focus:border-primary sm:text-sm"
             />
+          </div>
+          <div>
+            <label htmlFor="is_active" className="flex items-center">
+              <input
+                type="checkbox"
+                name="is_active"
+                id="is_active"
+                defaultChecked={internship.is_active}
+                className="h-4 w-4 text-primary border-border rounded focus:ring-ring"
+              />
+              <span className="ml-2 text-sm text-foreground">Active</span>
+            </label>
           </div>
           <button
             type="submit"

@@ -1,28 +1,21 @@
+
 "use server";
 
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase-server";
 
-export async function addCompany(formData) {
+export async function addCompany(prevState, formData) {
   console.log("Server-side FormData (addCompany):");
   console.log(Object.fromEntries(formData.entries()));
   const supabase = createClient();
 
   const name = formData.get("name");
-  const email = formData.get("email");
   const website = formData.get("website");
-  const description = formData.get("description");
-  const address = formData.get("address");
-  const phone = formData.get("phone");
 
   const { error } = await supabase.from("companies").insert({
     name,
-    email,
     website,
-    description,
-    address,
-    phone,
   });
 
   if (error) {
@@ -34,28 +27,20 @@ export async function addCompany(formData) {
   return { success: true, redirectTo: "/admin/entreprises" };
 }
 
-export async function updateCompany(formData) {
+export async function updateCompany(prevState, formData) {
   console.log("Server-side FormData (updateCompany):");
   console.log(Object.fromEntries(formData.entries()));
   const supabase = createClient();
 
   const id = formData.get("id");
   const name = formData.get("name");
-  const email = formData.get("email");
   const website = formData.get("website");
-  const description = formData.get("description");
-  const address = formData.get("address");
-  const phone = formData.get("phone");
 
   const { error } = await supabase
     .from("companies")
     .update({
       name,
-      email,
       website,
-      description,
-      address,
-      phone,
     })
     .eq("id", id);
 
@@ -81,7 +66,7 @@ export async function deleteCompany(id) {
   revalidatePath("/admin/entreprises");
 }
 
-export async function addInternship(formData) {
+export async function addInternship(prevState, formData) {
   console.log("Server-side FormData (addInternship):");
   console.log(formData);
   const supabase = createClient();
@@ -91,8 +76,8 @@ export async function addInternship(formData) {
   const company_id = formData.get("company_id");
   const location = formData.get("location");
   const duration = formData.get("duration");
-  const salary = formData.get("salary");
-  const application_link = formData.get("application_link");
+  const apply_url = formData.get("apply_url");
+  const field = formData.get("field");
   const is_active = formData.get("is_active") === "on";
 
   const { error } = await supabase.from("offers").insert({
@@ -101,8 +86,8 @@ export async function addInternship(formData) {
     company_id,
     location,
     duration,
-    salary,
-    application_link,
+    apply_url,
+    field,
     is_active,
   });
 
@@ -111,15 +96,43 @@ export async function addInternship(formData) {
     return { error: error.message };
   }
 
-  revalidatePath("/admin/offres");
-  return { success: true, redirectTo: "/admin/offres" };
-}
+  revalidatePath("/admin");
+  return { success: true, redirectTo: "/admin" };
 }
 
-export async function updateInternship(formData) {
+export async function updateInternship(prevState, formData) {
   console.log("Server-side FormData (updateInternship):");
   console.log(Object.fromEntries(formData.entries()));
   const supabase = createClient();
+  const id = formData.get("id");
+  const title = formData.get("title");
+  const description = formData.get("description");
+  const company_id = formData.get("company_id");
+  const location = formData.get("location");
+  const duration = formData.get("duration");
+  const apply_url = formData.get("apply_url");
+  const field = formData.get("field");
+  const is_active = formData.get("is_active") === "on";
+  const { error } = await supabase
+    .from("offers")
+    .update({
+      title,
+      description,
+      company_id,
+      location,
+      duration,
+      apply_url,
+      field,
+      is_active,
+    })
+    .eq("id", id);
+  if (error) {
+    console.error("Error updating internship:", error);
+    return { error: error.message };
+  }
+  revalidatePath("/admin");
+  return { success: true, redirectTo: "/admin" };
+}
 
 export async function deleteInternship(id) {
   const supabase = createClient();
