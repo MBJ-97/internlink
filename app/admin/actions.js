@@ -161,6 +161,7 @@ export async function deleteInternship(id) {
   }
 
   revalidatePath("/admin/offres");
+  revalidatePath("/stages");
 }
 
 export async function updateInternshipStatus(id, is_active) {
