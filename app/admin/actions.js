@@ -179,5 +179,6 @@ export async function updateInternshipStatus(id, is_active) {
   }
 
   revalidatePath("/admin/offres");
+  revalidatePath("/stages");
   return { success: true };
 }
