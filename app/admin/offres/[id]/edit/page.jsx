@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { useActionState, useEffect, useState, use } from 'react'
 import { supabase } from '@/lib/supabase'
 import wilayas from "@/lib/wilayas";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select.tsx";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select.jsx";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useRouter } from 'next/navigation'
 

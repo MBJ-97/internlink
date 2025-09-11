@@ -56,6 +56,22 @@ export async function updateCompany(prevState, formData) {
 export async function deleteCompany(id) {
   const supabase = createClient();
 
+  // Check if the company has any associated offers
+  const { data: offers, error: offersError } = await supabase
+    .from('offers')
+    .select('id')
+    .eq('company_id', id);
+
+  if (offersError) {
+    console.error("Error checking for offers:", offersError);
+    throw new Error('Could not verify company offers.');
+  }
+
+  if (offers && offers.length > 0) {
+    console.log(`Attempted to delete company ${id} which has ${offers.length} offers.`);
+    throw new Error('This company cannot be deleted because it has active offers.');
+  }
+
   const { error } = await supabase.from("companies").delete().eq("id", id);
 
   if (error) {
