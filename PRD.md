@@ -27,7 +27,8 @@ Create a public internship job board where students can discover offers and appl
 	•	Company name
 	•	Location
 	•	Duration
-	•	Field
+	•	Domain
+	•	Speciality
 	•	Clicking opens offer detail page with description + “Apply” button
 
 3.2 Offer Detail Page
@@ -67,7 +68,8 @@ id uuid pk
 company_id uuid fk → companies.id (nullable)  
 title text  
 location text  
-field text  
+domain text
+speciality text
 duration text  
 description text  
 apply_url text  

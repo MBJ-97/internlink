@@ -93,7 +93,8 @@ export async function addInternship(prevState, formData) {
   const location = formData.get("location");
   const duration = formData.get("duration");
   const apply_url = formData.get("apply_url");
-  const field = formData.get("field");
+  const domain = formData.get("domain");
+  const speciality = formData.get("speciality");
   const is_active = formData.get("is_active") === "on";
 
   const { error } = await supabase.from("offers").insert({
@@ -103,7 +104,8 @@ export async function addInternship(prevState, formData) {
     location,
     duration,
     apply_url,
-    field,
+    domain,
+    speciality,
     is_active,
   });
 
@@ -128,7 +130,8 @@ export async function updateInternship(prevState, formData) {
   const location = formData.get("location");
   const duration = formData.get("duration");
   const apply_url = formData.get("apply_url");
-  const field = formData.get("field");
+  const domain = formData.get("domain");
+  const speciality = formData.get("speciality");
   const is_active = formData.get("is_active") === "on";
   const { error } = await supabase
     .from("offers")
@@ -139,7 +142,8 @@ export async function updateInternship(prevState, formData) {
       location,
       duration,
       apply_url,
-      field,
+      domain,
+      speciality,
       is_active,
     })
     .eq("id", id);

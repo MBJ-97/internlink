@@ -33,6 +33,7 @@ const InternshipsTable = ({ internships }) => {
             <TableHead>Entreprise</TableHead>
             <TableHead>Lieu</TableHead>
             <TableHead>Domaine</TableHead>
+            <TableHead>Spécialité</TableHead>
             <TableHead>Durée</TableHead>
             <TableHead>Créé le</TableHead>
             <TableHead>Dernière modification</TableHead>
@@ -46,7 +47,8 @@ const InternshipsTable = ({ internships }) => {
               <TableCell>{internship.title}</TableCell>
               <TableCell>{internship.companies?.name || 'N/A'}</TableCell>
               <TableCell>{internship.location}</TableCell>
-              <TableCell>{internship.field}</TableCell>
+              <TableCell>{internship.domain}</TableCell>
+              <TableCell>{internship.speciality}</TableCell>
               <TableCell>{internship.duration}</TableCell>
               <TableCell>{formatDate(internship.created_at)}</TableCell>
               <TableCell>{formatDate(internship.updated_at)}</TableCell>

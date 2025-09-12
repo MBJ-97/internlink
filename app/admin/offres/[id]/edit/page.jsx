@@ -8,6 +8,7 @@ import wilayas from "@/lib/wilayas";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select.jsx";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useRouter } from 'next/navigation'
+import { domains } from '@/lib/domains'
 
 function EditInternshipPage({ params }) {
   const { id } = use(params)
@@ -15,6 +16,9 @@ function EditInternshipPage({ params }) {
   const [companies, setCompanies] = useState([])
   const [selectedLocation, setSelectedLocation] = useState("");
   const [selectedCompanyId, setSelectedCompanyId] = useState(""); // New state for company_id
+  const [selectedDomain, setSelectedDomain] = useState("");
+  const [specialities, setSpecialities] = useState([]);
+  const [selectedSpeciality, setSelectedSpeciality] = useState("");
   const [state, formAction] = useActionState(updateInternship, { success: false, error: null, data: null })
   const router = useRouter()
 
@@ -25,6 +29,8 @@ function EditInternshipPage({ params }) {
       if (internshipData) {
         setSelectedLocation(internshipData.location);
         setSelectedCompanyId(internshipData.company_id); // Set initial company_id
+        setSelectedDomain(internshipData.domain);
+        setSelectedSpeciality(internshipData.speciality);
       }
 
       const { data: companiesData } = await supabase.from('companies').select('id, name')
@@ -41,6 +47,15 @@ function EditInternshipPage({ params }) {
       router.push(state.redirectTo)
     }
   }, [state.success, state.redirectTo, router])
+
+  useEffect(() => {
+    if (selectedDomain) {
+      const domainData = domains.find(d => d.domain === selectedDomain);
+      setSpecialities(domainData ? domainData.specialties : []);
+    } else {
+      setSpecialities([]);
+    }
+  }, [selectedDomain]);
 
   if (!internship || companies.length === 0) { // Check if companies are loaded too
     return (
@@ -122,17 +137,40 @@ function EditInternshipPage({ params }) {
             <input type="hidden" name="location" value={selectedLocation} />
           </div>
           <div>
-            <label htmlFor="field" className="block text-sm font-medium text-foreground">
+            <label htmlFor="domain" className="block text-sm font-medium text-foreground">
               Domaine
             </label>
-            <input
-              type="text"
-              name="field"
-              id="field"
-              required
-              defaultValue={internship.field}
-              className="mt-1 block w-full px-3 py-2 bg-background border border-border rounded-md shadow-sm focus:outline-none focus:ring-ring focus:border-primary sm:text-sm"
-            />
+            <Select onValueChange={setSelectedDomain} value={selectedDomain}>
+              <SelectTrigger className="w-full">
+                <SelectValue placeholder="Sélectionner un domaine" />
+              </SelectTrigger>
+              <SelectContent>
+                {domains.map((d) => (
+                  <SelectItem key={d.domain} value={d.domain}>
+                    {d.domain}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+            <input type="hidden" name="domain" value={selectedDomain} />
+          </div>
+          <div>
+            <label htmlFor="speciality" className="block text-sm font-medium text-foreground">
+              Spécialité
+            </label>
+            <Select onValueChange={setSelectedSpeciality} value={selectedSpeciality} disabled={!selectedDomain}>
+              <SelectTrigger className="w-full">
+                <SelectValue placeholder="Sélectionner une spécialité" />
+              </SelectTrigger>
+              <SelectContent>
+                {specialities.map((speciality) => (
+                  <SelectItem key={speciality} value={speciality}>
+                    {speciality}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+            <input type="hidden" name="speciality" value={selectedSpeciality} />
           </div>
           <div>
             <label htmlFor="duration" className="block text-sm font-medium text-foreground">
