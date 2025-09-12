@@ -26,9 +26,11 @@ export function DeleteButton({ itemId, onDelete, itemType }) {
     try {
       const result = await onDelete(itemId);
       if (result && result.error) {
-        throw new Error(result.error);
+        setErrorMessage(result.error);
+        setStatus('error');
+      } else {
+        setStatus('success');
       }
-      setStatus('success');
     } catch (err) {
       setErrorMessage(err.message || `Failed to delete ${itemType}.`);
       setStatus('error');

@@ -30,8 +30,8 @@ const OfferDetailsPage = async ({ params }) => {
           <p className="text-xl text-muted-foreground">{offer.companies.name}</p>
         </div>
         <div className="flex justify-between text-lg mb-8">
-          <p><span className="font-semibold">Domaine :</span> {offer.domain}</p>
-          <p><span className="font-semibold">Spécialité :</span> {offer.speciality}</p>
+          <p><span className="font-semibold">Domaine :</span> {offer.domain}</p> <br />
+          <p><span className="font-semibold">Spécialité :</span> {offer.speciality}</p> <br />
           <p><span className="font-semibold">Lieu :</span> {offer.location}</p>
           <p><span className="font-semibold">Durée :</span> {offer.duration}</p>
         </div>

@@ -107,6 +107,21 @@ export async function updateCompany(prevState, formData) {
 export async function deleteCompany(id) {
   const supabase = createClient();
 
+  // Check if the company has any associated offers
+  const { data: offers, error: offersError } = await supabase
+    .from('offers')
+    .select('id')
+    .eq('company_id', id);
+
+  if (offersError) {
+    console.error('Error checking for associated offers:', offersError);
+    return { error: 'An unexpected error occurred while checking for associated offers.' };
+  }
+
+  if (offers && offers.length > 0) {
+    return { error: 'This company cannot be deleted because it has associated offers. Please delete the offers first.' };
+  }
+
   // First, get the company details to find the logo URL
   const { data: company, error: companyError } = await supabase
     .from('companies')
@@ -124,9 +139,6 @@ export async function deleteCompany(id) {
 
   if (deleteError) {
     console.error("Error deleting company:", deleteError);
-    if (deleteError.code === '23503') { // foreign_key_violation
-      return { error: 'This company cannot be deleted because it has associated offers. Please delete the offers first.' };
-    }
     return { error: "An unexpected error occurred while deleting the company." };
   }
 
