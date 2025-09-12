@@ -55,11 +55,12 @@ Create a public internship job board where students can discover offers and appl
 
 5. Data Model (Supabase)
 
-Table: companies (optional now, future HR portal)
+Table: companies
 
 id uuid pk  
 name text  
-website text  
+website text
+logo_url text
 created_at timestamp  
 
 Table: offers
@@ -76,6 +77,13 @@ apply_url text
 is_active boolean default true  
 created_at timestamp  
 updated_at timestamp  
+
+Storage: company_logos
+
+- Public bucket for company logos.
+- RLS policies:
+    - Authenticated users can upload, update, and delete.
+    - Anyone can read.
 
 
 ⸻

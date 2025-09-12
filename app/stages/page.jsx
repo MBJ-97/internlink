@@ -48,6 +48,12 @@ const InternshipsPage = () => {
     }
   };
 
+  const handleClearFilters = () => {
+    setSelectedDomain('');
+    setSelectedSpeciality('');
+    setSpecialities([]);
+  };
+
   useEffect(() => {
     let newFilteredOffers = offers;
     if (selectedDomain && selectedDomain !== 'all') {
@@ -64,8 +70,16 @@ const InternshipsPage = () => {
     <div className="container mx-auto px-4 py-8">
       <h1 className="text-3xl font-bold mb-8">Offres de Stage</h1>
       <div>
-        <h2 className="text-xl font-semibold">Filtres</h2>
-        <div className="flex flex-col md:flex-row gap-4 my-4">
+        <div className="flex items-center gap-4">
+          <h2 className="text-xl font-semibold">Filtres</h2>
+                    {(selectedDomain || selectedSpeciality) && (
+            <Button onClick={handleClearFilters} className="h-8 w-8 p-0 rounded-full bg-muted shadow-md group hover:bg-primary">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="black" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-4 w-4 group-hover:stroke-white"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+              <span className="sr-only">Clear filters</span>
+            </Button>
+          )}
+        </div>
+        <div className="flex flex-col md:flex-row items-center gap-4 my-4">
           <Select onValueChange={handleDomainChange} value={selectedDomain}>
             <SelectTrigger className="w-full md:w-[280px]">
               <SelectValue placeholder="Sélectionner un domaine" />

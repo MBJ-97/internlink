@@ -18,6 +18,7 @@ const CompaniesTable = ({ companies }) => {
       <Table>
         <TableHeader>
           <TableRow>
+            <TableHead>Logo</TableHead>
             <TableHead>Nom</TableHead>
             <TableHead>Site web</TableHead>
             <TableHead>Actions</TableHead>
@@ -26,6 +27,13 @@ const CompaniesTable = ({ companies }) => {
         <TableBody>
           {companies.map((company) => (
             <TableRow key={company.id}>
+              <TableCell>
+                {company.logo_url ? (
+                  <img src={company.logo_url} alt={`Logo of ${company.name}`} className="h-10 w-10 object-contain rounded-md" />
+                ) : (
+                  <div className="h-10 w-10 bg-muted rounded-md" />
+                )}
+              </TableCell>
               <TableCell>{company.name}</TableCell>
               <TableCell>
                 <a href={company.website} target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">

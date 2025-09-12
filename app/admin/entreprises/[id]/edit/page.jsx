@@ -12,11 +12,15 @@ function EditCompanyPage({ params }) {
   const [company, setCompany] = useState(null)
   const [state, formAction] = useActionState(updateCompany, { success: false, error: null, data: null })
   const router = useRouter()
+  const [logoPreview, setLogoPreview] = useState(null)
 
   useEffect(() => {
     async function fetchCompany() {
       const { data } = await supabase.from('companies').select('*').eq('id', id).single()
       setCompany(data)
+      if (data && data.logo_url) {
+        setLogoPreview(data.logo_url)
+      }
     }
     if (id) {
       fetchCompany()
@@ -28,6 +32,13 @@ function EditCompanyPage({ params }) {
       router.push(state.redirectTo)
     }
   }, [state.success, state.redirectTo, router])
+
+  const handleFileChange = (e) => {
+    const file = e.target.files[0]
+    if (file) {
+      setLogoPreview(URL.createObjectURL(file))
+    }
+  }
 
   if (!company) {
     return (
@@ -65,7 +76,7 @@ function EditCompanyPage({ params }) {
               name="name"
               id="name"
               required
-              defaultValue={company.name}
+              defaultValue={company.name || ''}
               className="mt-1 block w-full px-3 py-2 bg-background border border-border rounded-md shadow-sm focus:outline-none focus:ring-ring focus:border-primary sm:text-sm"
             />
           </div>
@@ -77,9 +88,29 @@ function EditCompanyPage({ params }) {
               type="url"
               name="website"
               id="website"
-              defaultValue={company.website}
+              defaultValue={company.website || ''}
               className="mt-1 block w-full px-3 py-2 bg-background border border-border rounded-md shadow-sm focus:outline-none focus:ring-ring focus:border-primary sm:text-sm"
             />
+          </div>
+          <div>
+            <label htmlFor="logo_url" className="block text-sm font-medium text-foreground">
+              Logo de l'entreprise
+            </label>
+            <input
+              type="file"
+              name="logo_url"
+              id="logo_url"
+              accept="image/*"
+              onChange={handleFileChange}
+              className="mt-1 block w-full px-3 py-2 bg-background border border-border rounded-md shadow-sm focus:outline-none focus:ring-ring focus:border-primary sm:text-sm"
+            />
+            {logoPreview && (
+              <div className="mt-4">
+                <p className="text-sm font-medium text-foreground">Aperçu du logo :</p>
+                <img src={logoPreview} alt="Aperçu du logo" className="mt-2 h-20 w-20 object-contain" />
+              </div>
+            )}
+            <input type="hidden" name="current_logo_url" value={company.logo_url || ''} />
           </div>
           <button
             type="submit"

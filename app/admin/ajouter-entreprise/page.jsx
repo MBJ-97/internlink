@@ -2,13 +2,14 @@
 
 import { addCompany } from "@/app/admin/actions";
 import Link from 'next/link'
-import { useActionState, useEffect, useRef } from 'react'
+import { useActionState, useEffect, useRef, useState } from 'react'
 import { useRouter } from 'next/navigation'
 
 function AddCompanyPage() {
   const [state, formAction] = useActionState(addCompany, { success: false, error: null, data: null })
   const formRef = useRef(null)
   const router = useRouter()
+  const [logoPreview, setLogoPreview] = useState(null)
 
   useEffect(() => {
     if (state.success && state.redirectTo) {
@@ -16,6 +17,15 @@ function AddCompanyPage() {
       router.push(state.redirectTo)
     }
   }, [state.success, state.redirectTo, router])
+
+  const handleFileChange = (e) => {
+    const file = e.target.files[0]
+    if (file) {
+      setLogoPreview(URL.createObjectURL(file))
+    } else {
+      setLogoPreview(null)
+    }
+  }
 
   return (
     <div className="min-h-screen  flex flex-col justify-center items-center">
@@ -50,6 +60,25 @@ function AddCompanyPage() {
               id="website"
               className="mt-1 block w-full px-3 py-2 bg-background border border-border rounded-md shadow-sm focus:outline-none focus:ring-ring focus:border-primary sm:text-sm"
             />
+          </div>
+          <div>
+            <label htmlFor="logo_url" className="block text-sm font-medium text-foreground">
+              Logo de l'entreprise
+            </label>
+            <input
+              type="file"
+              name="logo_url"
+              id="logo_url"
+              accept="image/*"
+              onChange={handleFileChange}
+              className="mt-1 block w-full px-3 py-2 bg-background border border-border rounded-md shadow-sm focus:outline-none focus:ring-ring focus:border-primary sm:text-sm"
+            />
+            {logoPreview && (
+              <div className="mt-4">
+                <p className="text-sm font-medium text-foreground">Aperçu du logo :</p>
+                <img src={logoPreview} alt="Aperçu du logo" className="mt-2 h-20 w-20 object-contain" />
+              </div>
+            )}
           </div>
           <button
             type="submit"

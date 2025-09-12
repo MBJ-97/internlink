@@ -12,10 +12,31 @@ export async function addCompany(prevState, formData) {
 
   const name = formData.get("name");
   const website = formData.get("website");
+  const logoFile = formData.get("logo_url");
+
+  let logoUrl = null;
+
+  if (logoFile && logoFile.size > 0) {
+    const { data: uploadData, error: uploadError } = await supabase.storage
+      .from("company_logos")
+      .upload(`public/${name.replace(/\s+/g, '-')}-${Date.now()}`, logoFile);
+
+    if (uploadError) {
+      console.error("Error uploading logo:", uploadError);
+      return { error: uploadError.message };
+    }
+
+    const { data: publicUrlData } = supabase.storage
+      .from("company_logos")
+      .getPublicUrl(uploadData.path);
+
+    logoUrl = publicUrlData.publicUrl;
+  }
 
   const { error } = await supabase.from("companies").insert({
     name,
     website,
+    logo_url: logoUrl,
   });
 
   if (error) {
@@ -35,12 +56,42 @@ export async function updateCompany(prevState, formData) {
   const id = formData.get("id");
   const name = formData.get("name");
   const website = formData.get("website");
+  const logoFile = formData.get("logo_url");
+  const currentLogoUrl = formData.get("current_logo_url");
+
+  let logoUrl = currentLogoUrl;
+
+  if (logoFile && logoFile.size > 0) {
+    const { data: uploadData, error: uploadError } = await supabase.storage
+      .from("company_logos")
+      .upload(`public/${name.replace(/\s+/g, '-')}-${Date.now()}`, logoFile);
+
+    if (uploadError) {
+      console.error("Error uploading new logo:", uploadError);
+      return { error: uploadError.message };
+    }
+
+    const { data: publicUrlData } = supabase.storage
+      .from("company_logos")
+      .getPublicUrl(uploadData.path);
+
+    logoUrl = publicUrlData.publicUrl;
+
+    // Delete the old logo if it exists
+    if (currentLogoUrl) {
+      const oldLogoPath = currentLogoUrl.split('/company_logos/')[1];
+      if(oldLogoPath) {
+        await supabase.storage.from("company_logos").remove([oldLogoPath]);
+      }
+    }
+  }
 
   const { error } = await supabase
     .from("companies")
     .update({
       name,
       website,
+      logo_url: logoUrl,
     })
     .eq("id", id);
 
@@ -56,30 +107,47 @@ export async function updateCompany(prevState, formData) {
 export async function deleteCompany(id) {
   const supabase = createClient();
 
-  // Check if the company has any associated offers
-  const { data: offers, error: offersError } = await supabase
-    .from('offers')
-    .select('id')
-    .eq('company_id', id);
+  // First, get the company details to find the logo URL
+  const { data: company, error: companyError } = await supabase
+    .from('companies')
+    .select('logo_url')
+    .eq('id', id)
+    .single();
 
-  if (offersError) {
-    console.error("Error checking for offers:", offersError);
-    throw new Error('Could not verify company offers.');
+  if (companyError) {
+    console.error('Error fetching company for deletion:', companyError);
+    return { error: 'Could not find the company to delete.' };
   }
 
-  if (offers && offers.length > 0) {
-    console.log(`Attempted to delete company ${id} which has ${offers.length} offers.`);
-    throw new Error('This company cannot be deleted because it has active offers.');
+  // Now, try to delete the company from the database
+  const { error: deleteError } = await supabase.from("companies").delete().eq("id", id);
+
+  if (deleteError) {
+    console.error("Error deleting company:", deleteError);
+    if (deleteError.code === '23503') { // foreign_key_violation
+      return { error: 'This company cannot be deleted because it has associated offers. Please delete the offers first.' };
+    }
+    return { error: "An unexpected error occurred while deleting the company." };
   }
 
-  const { error } = await supabase.from("companies").delete().eq("id", id);
+  // If the company was deleted successfully, delete its logo from storage
+  if (company.logo_url) {
+    const oldLogoPath = company.logo_url.split('/company_logos/')[1];
+    if (oldLogoPath) {
+        const { error: storageError } = await supabase.storage
+            .from('company_logos')
+            .remove([oldLogoPath]);
 
-  if (error) {
-    console.error("Error deleting company:", error);
-    return { error: error.message };
+        if (storageError) {
+            console.error('Error deleting company logo:', storageError);
+            // This is not a critical error, the company is deleted.
+            // We can just log it and not return an error to the user.
+        }
+    }
   }
 
   revalidatePath("/admin/entreprises");
+  return { success: true };
 }
 
 export async function addInternship(prevState, formData) {

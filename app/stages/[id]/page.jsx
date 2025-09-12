@@ -23,7 +23,12 @@ const OfferDetailsPage = async ({ params }) => {
     <div className="container mx-auto px-4 py-8">
       <div className="max-w-2xl mx-auto">
         <h1 className="text-4xl font-bold mb-4">{offer.title}</h1>
-        <p className="text-xl text-muted-foreground mb-8">{offer.companies.name}</p>
+                <div className="flex items-center gap-4 mb-8">
+          {offer.companies.logo_url && (
+            <img src={offer.companies.logo_url} alt={`${offer.companies.name} logo`} className="h-12 w-12 object-contain rounded-full" />
+          )}
+          <p className="text-xl text-muted-foreground">{offer.companies.name}</p>
+        </div>
         <div className="flex justify-between text-lg mb-8">
           <p><span className="font-semibold">Domaine :</span> {offer.domain}</p>
           <p><span className="font-semibold">Spécialité :</span> {offer.speciality}</p>
