@@ -6,9 +6,9 @@ import { useActionState, useEffect, useState, use } from 'react'
 import { supabase } from '@/lib/supabase'
 import wilayas from "@/lib/wilayas";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select.jsx";
-import { Skeleton } from "@/components/ui/skeleton";
 import { useRouter } from 'next/navigation'
 import { domains } from '@/lib/domains'
+import { EditOfferPageSkeleton } from './EditOfferPageSkeleton'
 
 function EditInternshipPage({ params }) {
   const { id } = use(params)
@@ -58,20 +58,7 @@ function EditInternshipPage({ params }) {
   }, [selectedDomain]);
 
   if (!internship || companies.length === 0) { // Check if companies are loaded too
-    return (
-      <div className="min-h-screen flex flex-col justify-center items-center">
-        <div className="max-w-md w-full bg-card p-8 rounded-lg shadow-md space-y-4">
-          <Skeleton className="h-8 w-3/4" />
-          <Skeleton className="h-4 w-1/2" />
-          <Skeleton className="h-10 w-full" />
-          <Skeleton className="h-4 w-1/2" />
-          <Skeleton className="h-10 w-full" />
-          <Skeleton className="h-10 w-full" />
-          <Skeleton className="h-10 w-full" />
-          <Skeleton className="h-10 w-full" />
-        </div>
-      </div>
-    )
+    return <EditOfferPageSkeleton />
   }
 
   return (

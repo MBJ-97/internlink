@@ -4,6 +4,8 @@ import { addCompany } from "@/app/admin/actions";
 import Link from 'next/link'
 import { useActionState, useEffect, useRef, useState } from 'react'
 import { useRouter } from 'next/navigation'
+import { companySectors } from '@/lib/sectors';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select.jsx";
 
 function AddCompanyPage() {
   const [state, formAction] = useActionState(addCompany, { success: false, error: null, data: null })
@@ -79,6 +81,67 @@ function AddCompanyPage() {
                 <img src={logoPreview} alt="Aperçu du logo" className="mt-2 h-20 w-20 object-contain" />
               </div>
             )}
+          </div>
+          <div>
+            <label htmlFor="sector" className="block text-sm font-medium text-foreground">
+              Secteur
+            </label>
+            <Select name="sector">
+              <SelectTrigger className="w-full">
+                <SelectValue placeholder="Sélectionner un secteur" />
+              </SelectTrigger>
+              <SelectContent>
+                {companySectors.map((sector) => (
+                  <SelectItem key={sector} value={sector}>
+                    {sector}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
+          <div>
+            <label htmlFor="description" className="block text-sm font-medium text-foreground">
+              Description
+            </label>
+            <textarea
+              name="description"
+              id="description"
+              rows="4"
+              className="mt-1 block w-full px-3 py-2 bg-background border border-border rounded-md shadow-sm focus:outline-none focus:ring-ring focus:border-primary sm:text-sm"
+            ></textarea>
+          </div>
+          <div>
+            <label htmlFor="values_culture" className="block text-sm font-medium text-foreground">
+              Valeurs et culture
+            </label>
+            <textarea
+              name="values_culture"
+              id="values_culture"
+              rows="4"
+              className="mt-1 block w-full px-3 py-2 bg-background border border-border rounded-md shadow-sm focus:outline-none focus:ring-ring focus:border-primary sm:text-sm"
+            ></textarea>
+          </div>
+          <div>
+            <label htmlFor="contact_name" className="block text-sm font-medium text-foreground">
+              Nom du contact
+            </label>
+            <input
+              type="text"
+              name="contact_name"
+              id="contact_name"
+              className="mt-1 block w-full px-3 py-2 bg-background border border-border rounded-md shadow-sm focus:outline-none focus:ring-ring focus:border-primary sm:text-sm"
+            />
+          </div>
+          <div>
+            <label htmlFor="contact_email" className="block text-sm font-medium text-foreground">
+              Email du contact
+            </label>
+            <input
+              type="email"
+              name="contact_email"
+              id="contact_email"
+              className="mt-1 block w-full px-3 py-2 bg-background border border-border rounded-md shadow-sm focus:outline-none focus:ring-ring focus:border-primary sm:text-sm"
+            />
           </div>
           <button
             type="submit"

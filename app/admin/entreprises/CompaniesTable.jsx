@@ -20,7 +20,9 @@ const CompaniesTable = ({ companies }) => {
           <TableRow>
             <TableHead>Logo</TableHead>
             <TableHead>Nom</TableHead>
-            <TableHead>Site web</TableHead>
+            <TableHead>Secteur</TableHead>
+            <TableHead>Nom du contact</TableHead>
+            <TableHead>Email du contact</TableHead>
             <TableHead>Actions</TableHead>
           </TableRow>
         </TableHeader>
@@ -35,11 +37,9 @@ const CompaniesTable = ({ companies }) => {
                 )}
               </TableCell>
               <TableCell>{company.name}</TableCell>
-              <TableCell>
-                <a href={company.website} target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">
-                  {company.website}
-                </a>
-              </TableCell>
+              <TableCell>{company.sector}</TableCell>
+              <TableCell>{company.contact_name}</TableCell>
+              <TableCell>{company.contact_email}</TableCell>
               <TableCell>
                 <div className="flex gap-2">
                   <Link href={`/admin/entreprises/${company.id}/edit`} className="text-primary hover:underline inline-flex items-center h-9 px-3 py-2">

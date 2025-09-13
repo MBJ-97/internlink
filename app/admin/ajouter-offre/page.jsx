@@ -9,11 +9,13 @@ import wilayas from "@/lib/wilayas";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select.jsx";
 import { useRouter } from 'next/navigation'
 import { domains } from '@/lib/domains'
+import { AddOfferPageSkeleton } from './AddOfferPageSkeleton'
 
 function AddOfferPage() {
   const [state, formAction] = useActionState(addInternship, { success: false, error: null, data: null })
   const formRef = useRef(null)
   const [companies, setCompanies] = useState([])
+  const [loading, setLoading] = useState(true)
   const [selectedLocation, setSelectedLocation] = useState(""); // Add state for location
   const [selectedDomain, setSelectedDomain] = useState("");
   const [specialities, setSpecialities] = useState([]);
@@ -24,6 +26,7 @@ function AddOfferPage() {
     async function fetchCompanies() {
       const { data } = await supabase.from('companies').select('id, name')
       setCompanies(data || [])
+      setLoading(false)
     }
     fetchCompanies()
   }, [])
@@ -45,6 +48,10 @@ function AddOfferPage() {
       setSelectedSpeciality('');
     }
   }, [selectedDomain]);
+
+  if (loading) {
+    return <AddOfferPageSkeleton />
+  }
 
   return (
     <div className="min-h-screen  flex flex-col justify-center items-center">

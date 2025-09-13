@@ -13,6 +13,11 @@ export async function addCompany(prevState, formData) {
   const name = formData.get("name");
   const website = formData.get("website");
   const logoFile = formData.get("logo_url");
+  const sector = formData.get("sector");
+  const description = formData.get("description");
+  const values_culture = formData.get("values_culture");
+  const contact_name = formData.get("contact_name");
+  const contact_email = formData.get("contact_email");
 
   let logoUrl = null;
 
@@ -37,6 +42,11 @@ export async function addCompany(prevState, formData) {
     name,
     website,
     logo_url: logoUrl,
+    sector,
+    description,
+    values_culture,
+    contact_name,
+    contact_email,
   });
 
   if (error) {
@@ -45,6 +55,7 @@ export async function addCompany(prevState, formData) {
   }
 
   revalidatePath("/admin/entreprises");
+  revalidatePath("/entreprises");
   return { success: true, redirectTo: "/admin/entreprises" };
 }
 
@@ -58,6 +69,11 @@ export async function updateCompany(prevState, formData) {
   const website = formData.get("website");
   const logoFile = formData.get("logo_url");
   const currentLogoUrl = formData.get("current_logo_url");
+  const sector = formData.get("sector");
+  const description = formData.get("description");
+  const values_culture = formData.get("values_culture");
+  const contact_name = formData.get("contact_name");
+  const contact_email = formData.get("contact_email");
 
   let logoUrl = currentLogoUrl;
 
@@ -92,6 +108,11 @@ export async function updateCompany(prevState, formData) {
       name,
       website,
       logo_url: logoUrl,
+      sector,
+      description,
+      values_culture,
+      contact_name,
+      contact_email,
     })
     .eq("id", id);
 
@@ -101,6 +122,7 @@ export async function updateCompany(prevState, formData) {
   }
 
   revalidatePath("/admin/entreprises");
+  revalidatePath("/entreprises");
   return { success: true, redirectTo: "/admin/entreprises" };
 }
 
@@ -159,6 +181,7 @@ export async function deleteCompany(id) {
   }
 
   revalidatePath("/admin/entreprises");
+  revalidatePath("/entreprises");
   return { success: true };
 }
 

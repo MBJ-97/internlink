@@ -57,11 +57,16 @@ Create a public internship job board where students can discover offers and appl
 
 Table: companies
 
-id uuid pk  
-name text  
-website text
+id uuid pk
+created_at timestamptz
+name text not null
 logo_url text
-created_at timestamp  
+website text
+sector text
+description text
+values_culture text
+contact_name text
+contact_email text  
 
 Table: offers
 
