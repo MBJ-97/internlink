@@ -6,12 +6,11 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import Link from 'next/link';
 
 const CompanyCard = ({ company }) => {
   return (
-    <Card className="group relative overflow-hidden transform transition-all hover:scale-105 flex flex-col items-center justify-center text-center p-6 h-full">
-      <div className="transition-all duration-300 group-hover:blur-sm flex flex-col items-center justify-center">
+    <Card className="group relative overflow-hidden transform transition-all hover:scale-105 flex flex-col items-center justify-center text-center p-6 aspect-square w-full">
+      <div className="flex flex-col items-center justify-center">
         <div className="relative h-32 w-32 mb-4">
           <img 
             src={company.logo_url || 'https://via.placeholder.com/150'} 
@@ -22,14 +21,16 @@ const CompanyCard = ({ company }) => {
         <CardHeader className="p-0 mb-2">
           <CardTitle className="text-xl font-bold">{company.name}</CardTitle>
           <CardDescription>{company.activity_domain}</CardDescription>
+          {company.active_offers_count !== undefined && (
+            <div className="absolute top-2 right-2 px-1.5 py-0.5 bg-black text-white text-xs font-medium rounded-full">
+              {company.active_offers_count} Active Offers
+            </div>
+          )}
         </CardHeader>
         <CardContent className="p-0">
           <p className="text-sm text-muted-foreground">{company.address}</p>
-          <p className="mt-2 text-sm h-16 overflow-hidden text-ellipsis">{company.description}</p>
+          
         </CardContent>
-      </div>
-      <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-        <Link href={`/entreprises/${company.id}`} className="text-white font-bold text-lg">En savoir plus</Link>
       </div>
     </Card>
   );
